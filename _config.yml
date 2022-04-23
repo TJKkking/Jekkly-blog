@@ -1,0 +1,56 @@
+title: ooTao' Blog # The title of the blog
+author: ooTao # Your name
+email: 2510399607@qq.com # your email shown in the footer
+url: ooTao.xyz # this is your site's root address.
+description: > # this means to ignore newlines until "show_excerpts:"
+  About
+favicon: "./net.png" # set the favicon of the site
+google_analytics: 
+
+show_excerpts: false # set to true to show excerpts on the homepage
+permalink: /:categories/:year/:title:output_ext
+
+beian: 滇ICP备2022002272号
+
+# Moving date format
+# refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
+moving:
+  #avatar_url: "https://i.loli.net/2020/02/17/vY49QcyqRlbtB78.jpg" # avatar in about page
+  avatar_url: "./micro.jpg"
+  about_you: 至今忆起那清晨，仿佛只是昨天。
+  date_format: "%b %d" # date format of posts in home page
+  back_to: "Home" # In the post page, you have a back button above the title, you can custom the text by yourself.
+
+  # generate social links in about page.
+  social_links:
+    # twitter:
+    github: TJKkking
+    # rss: RSS
+    # dribbble:
+    # facebook: huangyz0918
+    # flickr:
+    # instagram:
+    # linkedin: yizheng-huang
+    # pinterest:
+    # youtube:
+    # youtube_channel:
+    # youtube_channel_name:
+    # telegram:
+    # googleplus:
+    # microdotblog:
+    # reddit:
+    # Mastodon instances
+    # mastodon:
+    # - username:
+    #   instance:
+    # - username:
+    #   instance:
+
+# Build settings
+# theme: moving # note, please use huangyz0918/moving if you want to publish to Github Pages.
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+  - jekyll-sitemap
