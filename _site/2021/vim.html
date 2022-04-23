@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.0.1" />
+<meta property="og:title" content="💻【Linux】Vim 入门笔记" />
+<meta name="author" content="ooTao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="为什么要学习 vim" />
+<meta property="og:description" content="为什么要学习 vim" />
+<link rel="canonical" href="http://localhost:4000/2021/vim.html" />
+<meta property="og:url" content="http://localhost:4000/2021/vim.html" />
+<meta property="og:site_name" content="ooTao’ Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-26T02:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="💻【Linux】Vim 入门笔记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"ooTao"},"dateModified":"2021-01-26T02:00:00+08:00","datePublished":"2021-01-26T02:00:00+08:00","description":"为什么要学习 vim","headline":"💻【Linux】Vim 入门笔记","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/vim.html"},"url":"http://localhost:4000/2021/vim.html"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- local css -->
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/./net.png" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/grayscale.css" />
+  <!-- docsearch -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@alpha" />
+  <!-- utils -->
+  <link href="/assets/css/utilities.min.css" rel="stylesheet">
+  <!-- <link href="https://unpkg.com/tailwindcss@2.0.1/dist/utilities.min.css" rel="stylesheet"> -->
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <article
+  class="post h-entry"
+  id="post"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <head>
+    <title>💻【Linux】Vim 入门笔记</title>
+  </head>
+  <header class="post-header">
+    <div class="post-back">
+      <a class="black-link" href="http://localhost:4000">
+        ← Home
+      </a>
+    </div>
+
+    <h1 class="post-title p-name" itemprop="name headline">
+      💻【Linux】Vim 入门笔记
+    </h1>
+    <p class="post-meta">
+      <time
+        class="dt-published"
+        datetime="2021-01-26T02:00:00+08:00"
+        itemprop="datePublished"
+      >Jan 26, 2021
+      </time><span class="busuanzi_container_page">
+        <span id="busuanzi_container_page_pv">
+          •
+          <span id="busuanzi_value_page_pv"></span> View
+        </span>
+      </span>
+    </p>
+  </header>
+
+  
+
+
+
+<ul>
+  <li><a href="#为什么要学习-vim">为什么要学习 vim</a></li>
+  <li><a href="#为什么要写这篇文章">为什么要写这篇文章</a></li>
+  <li><a href="#学习资源">学习资源</a></li>
+  <li><a href="#入门">入门</a>
+    <ul>
+      <li><a href="#标准模式--插入模式">标准模式 / 插入模式</a></li>
+      <li><a href="#执行命令command">执行命令：<code class="highlighter-rouge">:&lt;command&gt;</code></a></li>
+      <li><a href="#退出-vimq--zz">退出 vim：<code class="highlighter-rouge">:q</code> / <code class="highlighter-rouge">ZZ</code></a></li>
+      <li><a href="#保存文件-w--w-filename">保存文件: <code class="highlighter-rouge">:w</code> / <code class="highlighter-rouge">:w &lt;filename&gt;</code></a></li>
+      <li><a href="#基本移动h--j--k--l">基本移动：<code class="highlighter-rouge">h</code> / <code class="highlighter-rouge">j</code> / <code class="highlighter-rouge">k</code> / <code class="highlighter-rouge">l</code></a></li>
+      <li><a href="#前往第一行--最后一行gg--g">前往第一行 / 最后一行：<code class="highlighter-rouge">gg</code> / <code class="highlighter-rouge">G</code></a></li>
+      <li><a href="#向右移动一个单词w--e">向右移动一个单词：<code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">e</code></a></li>
+      <li><a href="#向左移动一个单词b">向左移动一个单词：<code class="highlighter-rouge">b</code></a></li>
+      <li><a href="#移动到前一个单词的末尾ge">移动到前一个单词的末尾：<code class="highlighter-rouge">ge</code></a></li>
+      <li><a href="#前往当前行第一个--最后一个字符0--">前往当前行第一个 / 最后一个字符：<code class="highlighter-rouge">0</code> / <code class="highlighter-rouge">$</code></a></li>
+      <li><a href="#删除字符x--x">删除字符：<code class="highlighter-rouge">x</code> / <code class="highlighter-rouge">X</code></a></li>
+      <li><a href="#删除单词dw">删除单词：<code class="highlighter-rouge">dw</code></a></li>
+      <li><a href="#删除当前行dd">删除当前行：<code class="highlighter-rouge">dd</code></a></li>
+      <li><a href="#在当前位置后面插入a">在当前位置后面插入：<code class="highlighter-rouge">a</code></a></li>
+      <li><a href="#在当前行开始--末尾插入i--a">在当前行开始 / 末尾插入：<code class="highlighter-rouge">I</code> / <code class="highlighter-rouge">A</code></a></li>
+      <li><a href="#在当前行下面--上面插入新行o--o">在当前行下面 / 上面插入新行：<code class="highlighter-rouge">o</code> / <code class="highlighter-rouge">O</code></a></li>
+      <li><a href="#撤销--重做u--ctrl--r">撤销 / 重做：<code class="highlighter-rouge">u</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + r</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#中场休息vim-的一些模式">中场休息：vim 的一些模式</a>
+    <ul>
+      <li><a href="#重复-n-次操作nkey">重复 n 次操作：<code class="highlighter-rouge">n&lt;key&gt;</code></a></li>
+      <li><a href="#删除一个范围的内容drange">删除一个范围的内容：<code class="highlighter-rouge">d&lt;range&gt;</code></a></li>
+      <li><a href="#快捷键的小写和大写">快捷键的小写和大写</a></li>
+      <li><a href="#跨越多行选择内容v-进入可视模式">跨越多行选择内容：<code class="highlighter-rouge">v</code> 进入可视模式</a></li>
+    </ul>
+  </li>
+  <li><a href="#进阶">进阶</a>
+    <ul>
+      <li><a href="#替换一个字符r">替换一个字符：<code class="highlighter-rouge">r</code></a></li>
+      <li><a href="#替换连续多个字符r">替换连续多个字符：<code class="highlighter-rouge">R</code></a></li>
+      <li><a href="#更改一个范围的内容c">更改一个范围的内容：<code class="highlighter-rouge">c</code></a></li>
+      <li><a href="#复制当前行yy">复制当前行：<code class="highlighter-rouge">yy</code></a></li>
+      <li><a href="#粘贴到下一行--上一行p--p">粘贴到下一行 / 上一行：<code class="highlighter-rouge">p</code> / <code class="highlighter-rouge">P</code></a></li>
+      <li><a href="#移动到下一个指定字符ftarget">移动到下一个指定字符：<code class="highlighter-rouge">f&lt;target&gt;</code></a></li>
+      <li><a href="#删除当前字符并进入编辑模式s">删除当前字符，并进入编辑模式：<code class="highlighter-rouge">s</code></a></li>
+      <li><a href="#删除当前整行并进入编辑模式s">删除当前整行，并进入编辑模式：<code class="highlighter-rouge">S</code></a></li>
+      <li><a href="#从当前位置开始向右删除整行d">从当前位置开始向右删除整行：<code class="highlighter-rouge">D</code></a></li>
+      <li><a href="#从当前位置开始向右删除整行并进入编辑模式c">从当前位置开始向右删除整行，并进入编辑模式：<code class="highlighter-rouge">C</code></a></li>
+      <li><a href="#复制下一个单词yw">复制下一个单词：<code class="highlighter-rouge">yw</code></a></li>
+      <li><a href="#当前行置顶zt">当前行置顶：<code class="highlighter-rouge">zt</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#高级">高级</a>
+    <ul>
+      <li><a href="#查找文档中的关键字pattern">查找文档中的关键字：<code class="highlighter-rouge">/&lt;pattern&gt;</code></a></li>
+      <li><a href="#查找当前光标对应的完整单词">查找当前光标对应的完整单词：<code class="highlighter-rouge">*</code></a></li>
+      <li><a href="#在代码块匹配的括号之间跳转">在代码块匹配的括号之间跳转：<code class="highlighter-rouge">%</code></a></li>
+      <li><a href="#光标跳转到前一个位置--后一个位置ctrl--o--ctrl--i">光标跳转到前一个位置 / 后一个位置：<code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + i</code></a></li>
+      <li><a href="#替换文本rangesoldnewflag">替换文本：<code class="highlighter-rouge">:{range}s/{old}/{new}/{flag}</code></a>
+        <ul>
+          <li><a href="#作用范围-range">作用范围 range</a></li>
+          <li><a href="#替换模式-flag">替换模式 flag</a></li>
+        </ul>
+      </li>
+      <li><a href="#在-vim-中执行-shell-命令command">在 vim 中执行 shell 命令：<code class="highlighter-rouge">:!&lt;command&gt;</code></a>
+        <ul>
+          <li><a href="#获得命令提示prefix--ctrl--d">获得命令提示：<code class="highlighter-rouge">:&lt;prefix&gt; + &lt;Ctrl&gt; + d</code></a></li>
+        </ul>
+      </li>
+      <li><a href="#配置文件">配置文件</a></li>
+      <li><a href="#配置插件">配置插件</a></li>
+    </ul>
+  </li>
+  <li><a href="#其他工具-vim-化">其他工具 Vim 化</a></li>
+  <li><a href="#总结">总结</a></li>
+  <li><a href="#附录-1速查表">附录 1：速查表</a>
+    <ul>
+      <li><a href="#光标移动">光标移动</a></li>
+      <li><a href="#屏幕滚动">屏幕滚动</a></li>
+      <li><a href="#编辑">编辑</a></li>
+      <li><a href="#其他">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#附录-2vim-命令">附录 2：vim 命令</a></li>
+</ul>
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="为什么要学习-vim">为什么要学习 vim</h2>
+
+<p>最近遇到在服务端编辑代码文件、查日志的场景比较多，所以想要系统学习一下 vim。</p>
+
+<p>Vim 对于每个服务端开发人员都不陌生，这可能是我们接触最多的 Linux 软件。所有类 Unix 的系统（Linux、Mac）都安装了 vim。当我们通过终端操作文本时，vim 或许是我们唯一的选择。</p>
+
+<p>然而，vim 的使用方式和我们所熟悉的可视化编辑器完全不同，它的的快捷键是如此奇怪，不易上手。因此除非兴趣使然，我们很少会主动学习 vim。它的上限够高，下限也足够低，只需要掌握最基本的操作：<code class="highlighter-rouge">↑↓←→</code>、<code class="highlighter-rouge">i</code>、<code class="highlighter-rouge">&lt;ESC&gt;</code>、<code class="highlighter-rouge">:wq</code>，就可以覆盖大部分使用场景。那为什么还需要再深入学习 vim 呢？</p>
+
+<p>主要原因是：<strong>用较少的学习成本，换来较大的效率提升</strong>。Vim 常用的几个快捷键，可以在手指不离开键盘热区的情况下快速定位光标或编辑内容，这些内容的学习成本并不高。如果你开发运维的过程中和 vim 打交道的次数越来越多，掌握这些技巧可以极大的提升开发效率。即使现在没有需求，也可以提前上手这个强大的工具。</p>
+
+<h2 id="为什么要写这篇文章">为什么要写这篇文章</h2>
+<p>现有的 vim 教程 / 文章大多直接罗列完整的 vim 快捷键列表，让人不知从何下手。我认为应当先掌握最重要的、最高频的快捷键，满足日常开发所需；其他低频使用的快捷键，可以作为一个速查表按需查看，vim 的进阶用法也可以之后再深入研究。</p>
+
+<p>因此，我尝试作为一个 vim 初学者，总结 vim 主要和次要的快捷键，同时提供一些学习 vim 的资源。</p>
+
+<p>注意：在阅读本文时，你随时可以在终端执行 <code class="highlighter-rouge">vimtutor</code>，打开一个教程文本文件，尝试某个快捷键或命令。</p>
+
+<h2 id="学习资源">学习资源</h2>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=ER5JYFKkYDg">The Vim Tutorial Part One - Youtube</a>, <a href="https://www.youtube.com/watch?v=tExTz7GnpdQ&amp;t=467s">Part Two</a>：看英文字幕比较吃力的话，可以直接看本文</li>
+  <li>vimtutor：安装 vim 后自带的教程，在终端执行 <code class="highlighter-rouge">vimtutor</code> 即可打开，mac 系统下是中文文档<br />
+<img src="/media/16114169033178.jpg" alt="-w1439" /></li>
+  <li><a href="https://vim-adventures.com/">Vim Adventure</a>：以游戏的方式学习 vim</li>
+</ul>
+
+<blockquote>
+  <p>这里顺便再推荐一些可视化学习资源：</p>
+  <ul>
+    <li>数据结构与算法：<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Data Structure Visualization</a>、<a href="https://visualgo.net/zh">Visualgo</a></li>
+    <li>正则表达式：<a href="https://regexper.com/">regexper</a></li>
+    <li>Git：<a href="https://learngitbranching.js.org/?demo=&amp;locale=zh_CN">Learn Git Branching</a>（强烈推荐）、<a href="http://git-school.github.io/visualizing-git/">Visualizing Git</a></li>
+  </ul>
+</blockquote>
+
+<h2 id="入门">入门</h2>
+<h3 id="标准模式--插入模式">标准模式 / 插入模式</h3>
+<ul>
+  <li>标准模式（Normal Mode）：进入 vim 的默认模式，这个模式下按下任何键不会实际输入到文本中，按下 <code class="highlighter-rouge">:</code> 可以执行命令</li>
+  <li>插入模式（Insert Mode）：在标准模式按下 <code class="highlighter-rouge">i</code> 进入插入模式，此时可以输入文本；按下 <code class="highlighter-rouge">&lt;ESC&gt;</code> 退出插入模式</li>
+</ul>
+
+<p>可以配置 <code class="highlighter-rouge">ii</code> 退出插入模式，这样左手不需要移动到最左上角去按下 <code class="highlighter-rouge">&lt;ESC&gt;</code>。在标准模式下执行：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>imap ii &lt;Esc&gt;
+</code></pre></div></div>
+
+<p>可以将这条命令写到 vim 的<a href="#conf">配置文件</a>中。这条配置只会影响需要输入<em>连续的</em>两个 <code class="highlighter-rouge">i</code> 的场景：如果想要输入连续的两个 <code class="highlighter-rouge">i</code>，必须在按下第一个 <code class="highlighter-rouge">i</code> 之后稍等一会儿，再按第二个 <code class="highlighter-rouge">i</code>。不过英文中很少有单词包含连续的两个 <code class="highlighter-rouge">i</code>，所以影响可以忽略。</p>
+
+<h3 id="执行命令command">执行命令：<code class="highlighter-rouge">:&lt;command&gt;</code></h3>
+<p>按下 <code class="highlighter-rouge">:</code> 后输入命令，按回车执行。如 <code class="highlighter-rouge">:set number</code> 会显示行号。</p>
+
+<h3 id="退出-vimq--zz">退出 vim：<code class="highlighter-rouge">:q</code> / <code class="highlighter-rouge">ZZ</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">:q</code> / <code class="highlighter-rouge">:quit</code>：退出 vim，不作任何改动</li>
+  <li><code class="highlighter-rouge">:q!</code>：退出 vim，丢弃已有的改动</li>
+  <li><code class="highlighter-rouge">:wq</code>：保存更改（write）并退出（quit）vim</li>
+  <li><code class="highlighter-rouge">ZZ</code>：等同于 <code class="highlighter-rouge">:wq</code>，这个快捷键输入比 <code class="highlighter-rouge">:wq</code> 更快，注意是大写 <code class="highlighter-rouge">Z</code></li>
+</ul>
+
+<h3 id="保存文件-w--w-filename">保存文件: <code class="highlighter-rouge">:w</code> / <code class="highlighter-rouge">:w &lt;filename&gt;</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">:w</code>：保存更改</li>
+  <li><code class="highlighter-rouge">:w &lt;filename&gt;</code>：保存到一个新的文件
+    <h3 id="基本移动h--j--k--l">基本移动：<code class="highlighter-rouge">h</code> / <code class="highlighter-rouge">j</code> / <code class="highlighter-rouge">k</code> / <code class="highlighter-rouge">l</code></h3>
+    <p>使用 <code class="highlighter-rouge">h</code>、<code class="highlighter-rouge">j</code>、<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">l</code> 而不是 <code class="highlighter-rouge">←</code>、<code class="highlighter-rouge">↓</code>、<code class="highlighter-rouge">→</code>、<code class="highlighter-rouge">↑</code>，这能够避免将手指移出键盘热区再移回来。如果有必要的话，甚至可以禁用方向键，来强制自己使用 <code class="highlighter-rouge">h</code>、<code class="highlighter-rouge">j</code>、<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">l</code>：</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>map &lt;Left&gt; &lt;Nop&gt;
+map &lt;Right&gt; &lt;Nop&gt;
+map &lt;Up&gt; &lt;Nop&gt;
+map &lt;Down&gt; &lt;Nop&gt;
+</code></pre></div></div>
+
+<h3 id="前往第一行--最后一行gg--g">前往第一行 / 最后一行：<code class="highlighter-rouge">gg</code> / <code class="highlighter-rouge">G</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">gg</code>：前往第一行</li>
+  <li><code class="highlighter-rouge">1G</code>：同 <code class="highlighter-rouge">gg</code></li>
+  <li><code class="highlighter-rouge">G</code>：前往最后一行</li>
+</ul>
+
+<h3 id="向右移动一个单词w--e">向右移动一个单词：<code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">e</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">w</code>：向右移动一个单词，光标将落在下一个单词的首字符</li>
+  <li><code class="highlighter-rouge">e</code>：向右移动一个单词，光标将落在当前一个单词的最后一个字符</li>
+</ul>
+
+<p>在这里，连续的「数字+字母」、「特殊字符」视为一个单词。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>↓ 光标在这里
+Hello, world!
+     ↑ 按下 w
+    ↑ 按下 e
+Hello, world!
+       ↑ 按两下 w
+     ↑ 按两下 e
+</code></pre></div></div>
+
+<p>类似的还有 <code class="highlighter-rouge">W</code> / <code class="highlighter-rouge">E</code>，区别在于这两个快捷键将「空格」作为单词的分隔符。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>↓ 光标在这里
+Hello, world!
+       ↑ 按下 W
+     ↑ 按下 E
+Hello, world!
+            ↑ 按两下 E
+↑ 按两下 W 会移动到下一行
+</code></pre></div></div>
+
+<h3 id="向左移动一个单词b">向左移动一个单词：<code class="highlighter-rouge">b</code></h3>
+<p><code class="highlighter-rouge">b</code> 向左移动到前一个单词的首字符，相当于是 <code class="highlighter-rouge">w</code> 的逆操作。<code class="highlighter-rouge">b</code> 取 backwards 首字母，「单词」的定义同 <code class="highlighter-rouge">w</code>。</p>
+
+<p><code class="highlighter-rouge">2b</code> 向左移动两个单词，<code class="highlighter-rouge">nb</code> 向左移动 n 个单词。</p>
+
+<p><code class="highlighter-rouge">B</code> 向左移动一个单词，将「空格」作为单词的分隔符（同 <code class="highlighter-rouge">W</code>、<code class="highlighter-rouge">E</code>）。</p>
+
+<blockquote>
+  <p>单词移动类快捷键速记：web。</p>
+</blockquote>
+
+<h3 id="移动到前一个单词的末尾ge">移动到前一个单词的末尾：<code class="highlighter-rouge">ge</code></h3>
+<p><code class="highlighter-rouge">ge</code> 移动到前一个单词的末尾，<code class="highlighter-rouge">gE</code> 将空格作为单词的分隔符。</p>
+
+<h3 id="前往当前行第一个--最后一个字符0--">前往当前行第一个 / 最后一个字符：<code class="highlighter-rouge">0</code> / <code class="highlighter-rouge">$</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">0</code>：前往第一个字符，可以理解成是第 0 列</li>
+  <li><code class="highlighter-rouge">$</code>：前往最后一个字符</li>
+</ul>
+
+<h3 id="删除字符x--x">删除字符：<code class="highlighter-rouge">x</code> / <code class="highlighter-rouge">X</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">x</code>：删除当前字符，等同于 <code class="highlighter-rouge">&lt;Delete&gt;</code></li>
+  <li><code class="highlighter-rouge">X</code>：删除前一个字符</li>
+</ul>
+
+<h3 id="删除单词dw">删除单词：<code class="highlighter-rouge">dw</code></h3>
+<p>「单词」的定义同 <code class="highlighter-rouge">w</code>，单词后面的任意多个空格将被删除。</p>
+
+<p>类似的还有 <code class="highlighter-rouge">dW</code>，删除下一个空格前的单词。</p>
+
+<h3 id="删除当前行dd">删除当前行：<code class="highlighter-rouge">dd</code></h3>
+<p>略。</p>
+
+<h3 id="在当前位置后面插入a">在当前位置后面插入：<code class="highlighter-rouge">a</code></h3>
+<p><code class="highlighter-rouge">i</code> 在当前位置前面插入（insert），<code class="highlighter-rouge">a</code> 在当前位置后面插入（append）。</p>
+
+<h3 id="在当前行开始--末尾插入i--a">在当前行开始 / 末尾插入：<code class="highlighter-rouge">I</code> / <code class="highlighter-rouge">A</code></h3>
+<p>略。</p>
+
+<h3 id="在当前行下面--上面插入新行o--o">在当前行下面 / 上面插入新行：<code class="highlighter-rouge">o</code> / <code class="highlighter-rouge">O</code></h3>
+<p>插入新的空白行。</p>
+
+<h3 id="撤销--重做u--ctrl--r">撤销 / 重做：<code class="highlighter-rouge">u</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + r</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">u</code>：撤销（undo）</li>
+  <li><code class="highlighter-rouge">&lt;Ctrl&gt; + r</code>：重做（redo）</li>
+</ul>
+
+<h2 id="中场休息vim-的一些模式">中场休息：vim 的一些模式</h2>
+<h3 id="重复-n-次操作nkey">重复 n 次操作：<code class="highlighter-rouge">n&lt;key&gt;</code></h3>
+<p>Vim 中几乎所有操作都可以通过一个 <code class="highlighter-rouge">n</code> 前缀来重复 n 次：</p>
+
+<ul>
+  <li>多次方向移动：<code class="highlighter-rouge">nh</code> / <code class="highlighter-rouge">nj</code> / <code class="highlighter-rouge">nk</code> / <code class="highlighter-rouge">nl</code>。<code class="highlighter-rouge">5h</code> 向左移动 5 个字符，<code class="highlighter-rouge">5j</code> 向下移动 5 行。</li>
+  <li>向左移动多个单词：<code class="highlighter-rouge">nb</code>。<code class="highlighter-rouge">2b</code> 向左移动两个单词。</li>
+  <li>前往第 n 行：<code class="highlighter-rouge">nG</code>。<code class="highlighter-rouge">1G</code> 可以前往第一行，就是这个原理。如果希望在 vim 中显示行号，可以在标准模式下执行 <code class="highlighter-rouge">set number</code> 命令，也可以将这条命令写到 vim 的<a href="#conf">配置文件</a>中。</li>
+  <li>删除多个字符：<code class="highlighter-rouge">nx</code>。<code class="highlighter-rouge">2x</code> 删除两个字符，<code class="highlighter-rouge">2X</code> 向左删除两个字符。</li>
+  <li>
+    <p>移动多个单词：<code class="highlighter-rouge">nw</code> / <code class="highlighter-rouge">ne</code>。<code class="highlighter-rouge">2w</code> / <code class="highlighter-rouge">2e</code> 向右移动两个单词，等同于按两次 <code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">e</code>，示例：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ↓ 光标在这里
+  Hello, world!
+         ↑ 按下 2w
+       ↑ 按下 2e
+</code></pre></div>    </div>
+  </li>
+  <li>删除多个单词：<code class="highlighter-rouge">dnw</code> / <code class="highlighter-rouge">ndw</code>。<code class="highlighter-rouge">d2w</code> / <code class="highlighter-rouge">2dw</code> 删除光标后的两个单词。类似的还有 <code class="highlighter-rouge">dnW</code>，删除后面第 n 个空格之前的单词。</li>
+  <li>删除多个行：<code class="highlighter-rouge">dnd</code> / <code class="highlighter-rouge">ndd</code>。<code class="highlighter-rouge">d2d</code> / <code class="highlighter-rouge">2dd</code> 都可以删除光标开始的两行。</li>
+  <li>多次撤销：<code class="highlighter-rouge">nu</code>。<code class="highlighter-rouge">2u</code> 撤销前两步操作，等同于按两次 <code class="highlighter-rouge">u</code>。</li>
+  <li>多次重做 / <code class="highlighter-rouge">n&lt;Ctrl&gt; + r</code>。<code class="highlighter-rouge">2&lt;Ctrl&gt; + r</code> 重做被撤销的两步操作，等同于按两次 <code class="highlighter-rouge">&lt;Ctrl&gt; + r</code>。</li>
+</ul>
+
+<h3 id="删除一个范围的内容drange">删除一个范围的内容：<code class="highlighter-rouge">d&lt;range&gt;</code></h3>
+<p><code class="highlighter-rouge">d</code> 可以和<strong>任意</strong>光标移动的操作符结合，来删除一个<strong>范围</strong>的内容。</p>
+
+<p>这里，我们先明确一下「范围」的定义：</p>
+<ul>
+  <li>对于单词级别的移动，这个范围将是光标前后所处的位置对应的<strong>左闭右开</strong>的区间（<code class="highlighter-rouge">$</code> 是个例外）</li>
+  <li>对于行级别的移动，这个范围将是光标前后所处的位置之间的所有行，<strong>包含</strong>光标所在的两个行</li>
+</ul>
+
+<p>而且，<code class="highlighter-rouge">d</code> 可以向任意方向进行删除，都符合上述约定。</p>
+
+<p>可以打开 <code class="highlighter-rouge">vimtutor</code> 尝试一下这些命令，就可以理解上述“范围”的含义：</p>
+<ul>
+  <li><code class="highlighter-rouge">dw</code>：删除下一个单词，不会删除 <code class="highlighter-rouge">w</code> 跳转到的那个字符</li>
+  <li><code class="highlighter-rouge">db</code>：删除前一个单词，不会删除光标一开始指向的那个字符</li>
+  <li><code class="highlighter-rouge">d0</code>：删除当前位置到行开头的所有内容，不会删除光标一开始指向的那个字符</li>
+  <li><code class="highlighter-rouge">dG</code>：删除当前行到文件末尾的所有内容，包含当前行在内也会被删除</li>
+  <li><code class="highlighter-rouge">dgg</code>：删除当前行到文件开头的所有内容，包含当前行在内也会被删除，<code class="highlighter-rouge">d1G</code> 可以达到相同的效果</li>
+</ul>
+
+<p><code class="highlighter-rouge">$</code> 是一个例外，<code class="highlighter-rouge">d$</code> 会删除当前位置到行末尾的所有内容，包含行末尾在内的字符也都会被删除。</p>
+
+<p>这些命令不用可以去记，只需要记住上面「范围」的规则即可。比如 <code class="highlighter-rouge">3G</code> 会跳到第 3 行，那么 <code class="highlighter-rouge">d3G</code> 将删除当前行到第 3 行的所有内容，包括第 3 行；<code class="highlighter-rouge">j</code> 下移一行，那么 <code class="highlighter-rouge">dj</code> 将删除当前行和下一行，<code class="highlighter-rouge">d2j</code> 将删除当前行开始的 3 行内容；<code class="highlighter-rouge">dh</code>、<code class="highlighter-rouge">dl</code> 分别等价于 <code class="highlighter-rouge">x</code>、<code class="highlighter-rouge">X</code>…… 理解之后，你就可以做到举一反三了。</p>
+
+<p>最后再补充一下：<code class="highlighter-rouge">d</code> 和数字 <code class="highlighter-rouge">n</code> 可以组合在一起使用。<code class="highlighter-rouge">d</code> 表示删除元素，<code class="highlighter-rouge">n</code> 表示后面的命令重复 n 次。这两个命令以不同顺序组合也能达到相同的效果，比如 <code class="highlighter-rouge">d2w</code> 和 <code class="highlighter-rouge">2dw</code> 都是删除后两个单词。但我个人认为，这两个命令在语义上有区别：<code class="highlighter-rouge">d2w</code> 表示删除 <code class="highlighter-rouge">2w</code> 范围的内容，而 <code class="highlighter-rouge">2dw</code> 表示 <code class="highlighter-rouge">dw</code> 命令重复 2 次。</p>
+
+<blockquote>
+  <p>在 vim 术语中，将 <code class="highlighter-rouge">d</code> 后面的操作称为 <code class="highlighter-rouge">[number]</code> 与 <code class="highlighter-rouge">motion</code>，其中 <code class="highlighter-rouge">number</code> 是可选的。
+比如 <code class="highlighter-rouge">d2w</code> 中，<code class="highlighter-rouge">2</code> 就是 <code class="highlighter-rouge">number</code>，<code class="highlighter-rouge">w</code> 是 <code class="highlighter-rouge">motion</code>。
+本文为了便于理解，统称其为 <code class="highlighter-rouge">range</code>。</p>
+</blockquote>
+
+<h3 id="快捷键的小写和大写">快捷键的小写和大写</h3>
+<blockquote>
+  <p>部分快捷键见「进阶」一节</p>
+</blockquote>
+
+<p>不同的方向：</p>
+<ul>
+  <li><code class="highlighter-rouge">x</code> 向右、<code class="highlighter-rouge">X</code> 向左</li>
+  <li><code class="highlighter-rouge">p</code> 向下、<code class="highlighter-rouge">P</code> 向上</li>
+  <li><code class="highlighter-rouge">o</code> 向下、<code class="highlighter-rouge">O</code> 向上</li>
+  <li><code class="highlighter-rouge">f</code> 向右、<code class="highlighter-rouge">F</code> 向左</li>
+</ul>
+
+<p>更严格的条件：</p>
+<ul>
+  <li><code class="highlighter-rouge">w</code> 将特殊字符作为独立单词，<code class="highlighter-rouge">W</code> 只将空格作为单词分隔符</li>
+  <li><code class="highlighter-rouge">e</code> / <code class="highlighter-rouge">E</code>、<code class="highlighter-rouge">b</code> / <code class="highlighter-rouge">B</code> 同理</li>
+</ul>
+
+<p>更大的范围：</p>
+<ul>
+  <li><code class="highlighter-rouge">a</code> 在当前位置后面插入、<code class="highlighter-rouge">A</code> 在当前行末尾插入</li>
+  <li><code class="highlighter-rouge">i</code> 在当前位置前插入、<code class="highlighter-rouge">I</code> 在当前行开始插入</li>
+  <li><code class="highlighter-rouge">d</code> 删除一个范围、<code class="highlighter-rouge">D</code> 删除到行末尾</li>
+  <li><code class="highlighter-rouge">c</code> 删除一个范围、<code class="highlighter-rouge">C</code> 删除到行末尾，并进入编辑模式</li>
+  <li><code class="highlighter-rouge">s</code> 删除当前字符，并进入编辑模式；<code class="highlighter-rouge">S</code> 删除当前整行，并进入编辑模式</li>
+</ul>
+
+<p>连续操作：</p>
+<ul>
+  <li><code class="highlighter-rouge">r</code> 替换一个字符、<code class="highlighter-rouge">R</code> 连续替换多个字符直到按下 <code class="highlighter-rouge">&lt;Esc&gt;</code></li>
+</ul>
+
+<h3 id="跨越多行选择内容v-进入可视模式">跨越多行选择内容：<code class="highlighter-rouge">v</code> 进入可视模式</h3>
+<p>按下 <code class="highlighter-rouge">v</code> 进入可视模式（visual mode），然后移动光标以选择文本：</p>
+<ul>
+  <li>按下 <code class="highlighter-rouge">y</code> 可以复制选中的文本</li>
+  <li>按下 <code class="highlighter-rouge">d</code> 可以删除选中的文本，按下 <code class="highlighter-rouge">p</code> 放置（粘贴）这些文本，这就实现了<strong>剪切</strong>功能</li>
+</ul>
+
+<p><img src="/media/vim-visual-mode.gif" alt="vim-visual-mode" /></p>
+
+<h2 id="进阶">进阶</h2>
+<h3 id="替换一个字符r">替换一个字符：<code class="highlighter-rouge">r</code></h3>
+<p><code class="highlighter-rouge">r</code>：再按下任意键，替换（replace）当前字符，等同于 <code class="highlighter-rouge">x</code> + <code class="highlighter-rouge">i</code>。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ↓ 光标在这里
+Helle, world!
+# 先按 r，再按 o
+Hello, world!
+    ↑ 光标在这里
+</code></pre></div></div>
+
+<h3 id="替换连续多个字符r">替换连续多个字符：<code class="highlighter-rouge">R</code></h3>
+<p><code class="highlighter-rouge">R</code>：替换连续的多个字符，按下 <code class="highlighter-rouge">&lt;Esc&gt;</code> 可以退出替换模式。</p>
+
+<h3 id="更改一个范围的内容c">更改一个范围的内容：<code class="highlighter-rouge">c</code></h3>
+<p><code class="highlighter-rouge">c</code> 取 change 的首字母，这个命令的便捷之处在于将「删除操作」和「进入编辑模式」合二为一，可以少按一个键。</p>
+<ul>
+  <li><code class="highlighter-rouge">cw</code>：更改下一个单词，等同于 <code class="highlighter-rouge">dw</code> + <code class="highlighter-rouge">i</code></li>
+  <li><code class="highlighter-rouge">c2w</code>：更改后两个单词，等同于 <code class="highlighter-rouge">d2w</code> + <code class="highlighter-rouge">i</code></li>
+  <li><code class="highlighter-rouge">c$</code>：更改从当前位置到行结束的所有内容，等同于 <code class="highlighter-rouge">d$</code> + <code class="highlighter-rouge">i</code></li>
+</ul>
+
+<p>和 <code class="highlighter-rouge">d</code> 一样，<code class="highlighter-rouge">c</code> 也可以和任意光标移动的操作符结合，来更改一个范围的内容。</p>
+
+<h3 id="复制当前行yy">复制当前行：<code class="highlighter-rouge">yy</code></h3>
+<p><code class="highlighter-rouge">yy</code> 复制当前行，<code class="highlighter-rouge">p</code> 粘贴到目标位置。</p>
+
+<p><code class="highlighter-rouge">nyy</code> 复制当前行向下的多行。</p>
+
+<h3 id="粘贴到下一行--上一行p--p">粘贴到下一行 / 上一行：<code class="highlighter-rouge">p</code> / <code class="highlighter-rouge">P</code></h3>
+<p>如上所述，<code class="highlighter-rouge">p</code> 粘贴到目标位置。</p>
+
+<p>通过 <code class="highlighter-rouge">dd</code> 删除某一行后，也可以按下 <code class="highlighter-rouge">p</code>，将删除掉的内容放置到当前光标位置下一行。注意这里是「放置」而不是「粘贴」，因为 <code class="highlighter-rouge">dd</code> 将被删除的行保存到了缓冲区，而 <code class="highlighter-rouge">p</code> 其实是将缓冲区的内容放置到当前位置，所以 <code class="highlighter-rouge">p</code> 取 put 的首字母，而非 paste。</p>
+
+<p>同理，<code class="highlighter-rouge">yy</code> 将当前行保存到缓冲区，但不删除。这样 <code class="highlighter-rouge">yy</code> + <code class="highlighter-rouge">p</code> 就可以实现“复制-粘贴”的操作。</p>
+
+<p>大写 <code class="highlighter-rouge">P</code> 粘贴到上一行。</p>
+
+<h3 id="移动到下一个指定字符ftarget">移动到下一个指定字符：<code class="highlighter-rouge">f&lt;target&gt;</code></h3>
+<p><code class="highlighter-rouge">ft</code> 移动到下一个 <code class="highlighter-rouge">t</code> 出现的位置，<code class="highlighter-rouge">f2</code> 移动到下一个 <code class="highlighter-rouge">2</code> 出现的位置。<code class="highlighter-rouge">f</code> 取 forward 的首字母。</p>
+
+<p><code class="highlighter-rouge">F</code> 类似于 <code class="highlighter-rouge">f</code>，向前移动到前一个指定字符。</p>
+
+<p><code class="highlighter-rouge">t</code> 类似于 <code class="highlighter-rouge">f</code>，只不过光标会移动到下一个指定字符<strong>之前</strong>；<code class="highlighter-rouge">T</code> 类似于 <code class="highlighter-rouge">F</code>，只不过光标会移动到前一个指定字符<strong>之后</strong>。<code class="highlighter-rouge">t</code> 取 until 的含义。</p>
+
+<p>示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ↓ 光标在这里
+Hello, world!
+        ↑ fo
+         ↑ fr
+↑ Fh
+       ↑ to
+ ↑ Th
+</code></pre></div></div>
+
+<h3 id="删除当前字符并进入编辑模式s">删除当前字符，并进入编辑模式：<code class="highlighter-rouge">s</code></h3>
+<p><code class="highlighter-rouge">s</code> 等同于 <code class="highlighter-rouge">x</code> + <code class="highlighter-rouge">i</code>。</p>
+
+<h3 id="删除当前整行并进入编辑模式s">删除当前整行，并进入编辑模式：<code class="highlighter-rouge">S</code></h3>
+<p><code class="highlighter-rouge">S</code> 等同于 <code class="highlighter-rouge">dd</code> + <code class="highlighter-rouge">o</code>。</p>
+
+<h3 id="从当前位置开始向右删除整行d">从当前位置开始向右删除整行：<code class="highlighter-rouge">D</code></h3>
+<p><code class="highlighter-rouge">D</code> 等同于 <code class="highlighter-rouge">d$</code>。</p>
+
+<h3 id="从当前位置开始向右删除整行并进入编辑模式c">从当前位置开始向右删除整行，并进入编辑模式：<code class="highlighter-rouge">C</code></h3>
+<p><code class="highlighter-rouge">C</code> 等同于 <code class="highlighter-rouge">c$</code>，或者 <code class="highlighter-rouge">d$</code> + <code class="highlighter-rouge">a</code>，或者 <code class="highlighter-rouge">D</code> + <code class="highlighter-rouge">a</code>。</p>
+
+<h3 id="复制下一个单词yw">复制下一个单词：<code class="highlighter-rouge">yw</code></h3>
+<p><code class="highlighter-rouge">y</code> 取 yank（复制）的首字母。<code class="highlighter-rouge">yw</code> 复制下一个单词，<code class="highlighter-rouge">p</code> 可以将其粘贴（put）到指定位置。</p>
+
+<p>事实上，<code class="highlighter-rouge">y</code> 和 <code class="highlighter-rouge">c</code>、<code class="highlighter-rouge">d</code> 一样，可以和任意光标移动的操作符结合，来复制一个范围的内容。比如 <code class="highlighter-rouge">y$</code> 将复制当前位置到行末尾的全部内容，<code class="highlighter-rouge">yh</code> 将复制光标前面的字符，<code class="highlighter-rouge">yG</code> 复制光标所在行到最后一行的所有内容。</p>
+
+<p>最后，<code class="highlighter-rouge">yy</code> 复制当前行，可以和 <code class="highlighter-rouge">dd</code> 一起理解 —— <code class="highlighter-rouge">dd</code> 删除一整行，快捷键重复表示操作的是<strong>一整行</strong>，不管光标位置在哪里。第二个 <code class="highlighter-rouge">y</code> 和 <code class="highlighter-rouge">d</code> 并没有语义上的含义。</p>
+
+<h3 id="当前行置顶zt">当前行置顶：<code class="highlighter-rouge">zt</code></h3>
+<p><code class="highlighter-rouge">zt</code> 把当前行置于屏幕顶端。<code class="highlighter-rouge">z</code> 字取其象形意义，模拟一张纸的折叠变形。<code class="highlighter-rouge">t</code> 取 top 的首字母。</p>
+
+<p><code class="highlighter-rouge">zz</code> 将当前行置于屏幕中央。<code class="highlighter-rouge">zb</code> 将当前行置于屏幕底端，<code class="highlighter-rouge">b</code> 取 bottom 的首字母。</p>
+
+<h2 id="高级">高级</h2>
+
+<h3 id="查找文档中的关键字pattern">查找文档中的关键字：<code class="highlighter-rouge">/&lt;pattern&gt;</code></h3>
+<p><code class="highlighter-rouge">/</code> 从光标所在位置向后查找关键字，<code class="highlighter-rouge">n</code> / <code class="highlighter-rouge">N</code> 查找下一个 / 上一个匹配的位置。</p>
+
+<p><code class="highlighter-rouge">?</code> 向前查找，不过很少使用。如果想向前查找的话，使用 <code class="highlighter-rouge">/</code> + <code class="highlighter-rouge">N</code> 就可以了。</p>
+
+<p><code class="highlighter-rouge">q/</code>、<code class="highlighter-rouge">q?</code> 可以列出 <code class="highlighter-rouge">/</code>、<code class="highlighter-rouge">?</code> 的查找历史，上下选择，按 <code class="highlighter-rouge">i</code> 编辑，回车执行，<code class="highlighter-rouge">:q</code>退出。</p>
+
+<p><code class="highlighter-rouge">&lt;pattern&gt;</code> 可以是正则表达式，比如 <code class="highlighter-rouge">/vim$</code> 查找位于行尾的 <code class="highlighter-rouge">vim</code>。查找特殊字符时需要转义，比如 <code class="highlighter-rouge">/vim\$</code> 查找 <code class="highlighter-rouge">vim$</code>。</p>
+
+<p>在查找模式中加入 <code class="highlighter-rouge">\c</code> 表示大小写不敏感查找，<code class="highlighter-rouge">\C</code> 表示大小写敏感，比如 <code class="highlighter-rouge">/foo\c</code> 会查找 <code class="highlighter-rouge">foo</code>、<code class="highlighter-rouge">Foo</code> 等。默认是大小写敏感，可以执行 <code class="highlighter-rouge">:set ignorecase</code> 或写入<a href="#conf">配置文件</a>设置大小写不敏感为默认的查找模式。</p>
+
+<p>查找相关命令：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set ic // 等价于 set ignorecase
+set hls is // 高亮匹配项
+nohlsearch // 移除匹配项的高亮显示
+</code></pre></div></div>
+
+<h3 id="查找当前光标对应的完整单词">查找当前光标对应的完整单词：<code class="highlighter-rouge">*</code></h3>
+<p>示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ↓ 光标在这里
+Hello, world!
+</code></pre></div></div>
+
+<p>此时按下<code class="highlighter-rouge">*</code>，将查找 <code class="highlighter-rouge">Hello</code> 这个单词，并且要求 <code class="highlighter-rouge">Hello</code> 出现位置的前后均为空白字符或标点符号，即查找完整独立的单词。</p>
+
+<h3 id="在代码块匹配的括号之间跳转">在代码块匹配的括号之间跳转：<code class="highlighter-rouge">%</code></h3>
+<p><code class="highlighter-rouge">%</code> 在匹配的括号之间跳转。需要将光标放在 <code class="highlighter-rouge">{}[]()</code> 上，然后按 <code class="highlighter-rouge">%</code>。 如果光标所在的位置不是 <code class="highlighter-rouge">{}[]()</code>，那么会向右查找第一个 <code class="highlighter-rouge">{}[]()</code>。</p>
+
+<h3 id="光标跳转到前一个位置--后一个位置ctrl--o--ctrl--i">光标跳转到前一个位置 / 后一个位置：<code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + i</code></h3>
+<p>在标准模式下，<code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> 将光标跳转到前一个位置，<code class="highlighter-rouge">&lt;Ctrl&gt; + i</code> 跳转到后一个位置。</p>
+
+<p>注意这里使用的是“跳转”。<code class="highlighter-rouge">h</code> / <code class="highlighter-rouge">j</code>/ <code class="highlighter-rouge">k</code> / <code class="highlighter-rouge">l</code> / <code class="highlighter-rouge">w</code> 等移动将不会记录在「跳转表」中，只有通过 <code class="highlighter-rouge">gg</code> / <code class="highlighter-rouge">nG</code> / 查找时的 <code class="highlighter-rouge">n</code> / <code class="highlighter-rouge">N</code> 等命令执行的跳转操作，才可以通过 <code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + i</code> 来回跳转。</p>
+
+<blockquote>
+  <p>补充：</p>
+  <ul>
+    <li>在 VS Code 中，向前一个 / 后一个位置跳转的快捷键是 <code class="highlighter-rouge">&lt;Ctrl&gt; + [</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + ]</code>。</li>
+    <li>在 Intellij 等 Jetbrains 系列软件中，向前一个 / 后一个位置跳转的快捷键是 <code class="highlighter-rouge">&lt;Command&gt; + [</code> / <code class="highlighter-rouge">&lt;Command&gt; + ]</code>。如果不是，可以在 <code class="highlighter-rouge">Preferences</code> 中搜索 <code class="highlighter-rouge">back</code>，然后在 <code class="highlighter-rouge">KeyMap -&gt; Main menu -&gt; Navigate -&gt; Back</code> 中设置。</li>
+  </ul>
+</blockquote>
+
+<h3 id="替换文本rangesoldnewflag">替换文本：<code class="highlighter-rouge">:{range}s/{old}/{new}/{flag}</code></h3>
+<p><code class="highlighter-rouge">:s</code>（substitute）命令用来查找和替换文本。语法如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:{range}s/{old}/{new}/{flag}
+</code></pre></div></div>
+
+<p>表示在指定范围 <code class="highlighter-rouge">range</code> 内查找字符串 <code class="highlighter-rouge">old</code> 并替换为 <code class="highlighter-rouge">bar</code>，<code class="highlighter-rouge">flag</code> 说明了替换模式，如只替换首次出现、或全部替换。</p>
+
+<h4 id="作用范围-range">作用范围 range</h4>
+<p>作用范围分为当前行、全文、行范围、选区等：</p>
+<ul>
+  <li>当前行：空白，默认，如 <code class="highlighter-rouge">:s/foo/bar/g</code></li>
+  <li>全文：<code class="highlighter-rouge">%</code>，如 <code class="highlighter-rouge">:%s/foo/bar/g</code></li>
+  <li>n~m 行：<code class="highlighter-rouge">n,m</code>，如 <code class="highlighter-rouge">:5,12s/foo/bar/g</code> 表示 5~12 行</li>
+  <li>当前行与之后 n 行：<code class="highlighter-rouge">.,+n</code>，如 <code class="highlighter-rouge">:.,+2s/foo/bar/g</code> 表示当前行与之后 2 行</li>
+  <li>选区：略</li>
+</ul>
+
+<h4 id="替换模式-flag">替换模式 flag</h4>
+<p>替换模式：</p>
+<ul>
+  <li>空白：默认，只替换光标位置之后的首次出现，如 <code class="highlighter-rouge">:%s/foo/bar</code></li>
+  <li><code class="highlighter-rouge">g</code>：全局替换，替换每次出现（global），如 <code class="highlighter-rouge">:%s/foo/bar/g</code></li>
+  <li><code class="highlighter-rouge">i</code>：</li>
+  <li><code class="highlighter-rouge">c</code>：交互式替换，每次替换前需要用户确认（confirm），如 <code class="highlighter-rouge">:%s/foo/bar/gc</code> 表示查找全文的所有 <code class="highlighter-rouge">foo</code> 并替换为 <code class="highlighter-rouge">bar</code>，每次替换前都需要确认：
+    <ul>
+      <li>按下回车执行后，提示 <code class="highlighter-rouge">replace with bar (y/n/a/q/l/^E/^Y)?</code></li>
+      <li><code class="highlighter-rouge">y</code> 表示替换</li>
+      <li><code class="highlighter-rouge">n</code> 表示不替换</li>
+      <li><code class="highlighter-rouge">a</code> 表示替换后续所有</li>
+      <li><code class="highlighter-rouge">q</code> 表示退出查找模式</li>
+      <li><code class="highlighter-rouge">l</code> 表示替换当前位置并退出查找模式</li>
+      <li><code class="highlighter-rouge">^E</code>、<code class="highlighter-rouge">^Y</code> 用于向上、向下滚动屏幕，<code class="highlighter-rouge">^</code> 表示 <code class="highlighter-rouge">&lt;Ctrl&gt;</code> 键</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="在-vim-中执行-shell-命令command">在 vim 中执行 shell 命令：<code class="highlighter-rouge">:!&lt;command&gt;</code></h3>
+<p>比如通过 vim 编辑文本的时候，希望打印当前目录，但是又不想退出 vim，那么就可以直接在 vim 中执行：<code class="highlighter-rouge">:!pwd</code>，这等同于在 shell 中执行 <code class="highlighter-rouge">pwd</code>。</p>
+
+<h4 id="获得命令提示prefix--ctrl--d">获得命令提示：<code class="highlighter-rouge">:&lt;prefix&gt; + &lt;Ctrl&gt; + d</code></h4>
+<p>在 vim 中输入 <code class="highlighter-rouge">:</code>，再按下 <code class="highlighter-rouge">&lt;Ctrl&gt; + d</code>，将展示所有可以在 vim 中使用的命令。</p>
+
+<p>输入 <code class="highlighter-rouge">:w</code>，再按下 <code class="highlighter-rouge">&lt;Ctrl&gt; + d</code>，将展示所有可以在 vim 中使用的、以 <code class="highlighter-rouge">w</code> 开头的命令。</p>
+
+<div id="conf"></div>
+<h3 id="配置文件">配置文件</h3>
+<p>配置文件位于 <code class="highlighter-rouge">~/.vimrc</code>，其内容是若干行可在 vim 中执行的命令，会在每次打开 vim 时自动执行。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set number # 显示行号
+set ignorecase # 大小写不敏感查找
+set ic // 等价于 set ignorecase
+set smartcase # 如果有一个大写字母，则切换到大小写敏感查找
+set hls is // 高亮匹配项
+nohlsearch // 移除匹配项的高亮显示
+</code></pre></div></div>
+
+<h3 id="配置插件">配置插件</h3>
+<ul>
+  <li>代码块折叠：TODO</li>
+  <li><a href="https://zhuanlan.zhihu.com/p/58816186">Vim 插件推荐</a></li>
+</ul>
+
+<h2 id="其他工具-vim-化">其他工具 Vim 化</h2>
+<ul>
+  <li>Chrome：<a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a>，通过类似 vim 风格的快捷键操作浏览器窗口</li>
+  <li>VS Code：Vim 插件，将 VS Code 的编辑器转为 vim 模式</li>
+</ul>
+
+<h2 id="总结">总结</h2>
+<p>掌握「入门」一节中的快捷键，基本可以满足大部分使用场景。如果想进一步提升效率，那么「进阶」一节中的快捷键也值得学习。「高级」一节的内容，由于我还没有将 vim 作为主力开发工具，尚未深入研究，所以等以后有机会再补充。</p>
+
+<p>可以在其他编辑器中配合 vim 插件，来培养 vim 的使用习惯。将 Chrome vim 化，也能体验到 vim 带来的酷炫与极客感。</p>
+
+<p>最后，<strong>在实践中学习命令</strong>！如果只是阅读而不尝试，那么很快就会遗忘。</p>
+
+<p>希望本文对你有帮助。</p>
+
+<h2 id="附录-1速查表">附录 1：速查表</h2>
+<p>仅作为正文的补充，记录一些可能有用的快捷键。</p>
+
+<h3 id="光标移动">光标移动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">^</code></td>
+      <td>移动到当前行第一个非空字符</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;Space&gt;</code></td>
+      <td>向右移动一个字符，等同于 <code class="highlighter-rouge">l</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;Alt&gt; + ←</code>, <code class="highlighter-rouge">&lt;Alt&gt; + →</code></td>
+      <td>向左 / 向右移动一个单词，等同于 <code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">b</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">:n&lt;enter&gt;</code></td>
+      <td>跳到指定行，等同于 <code class="highlighter-rouge">nG</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ngg</code></td>
+      <td>跳到指定行，等同于 <code class="highlighter-rouge">nG</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">H</code></td>
+      <td>光标移动到屏幕最上方（head）</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">M</code></td>
+      <td>光标移动到屏幕中央（middle）</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">L</code></td>
+      <td>光标移动到屏幕最下方（last）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="屏幕滚动">屏幕滚动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>向上 / 向下滚动一行</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + y</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + e</code></td>
+    </tr>
+    <tr>
+      <td>向上 / 向下滚动一页</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + f</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + b</code>（forward，backward）</td>
+    </tr>
+    <tr>
+      <td>向上 / 向下滚动半页</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + d</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + u</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>这些命令在大部分 Unix 软件中都可以使用，比如 <code class="highlighter-rouge">man</code>、<code class="highlighter-rouge">less</code>、<code class="highlighter-rouge">tmux</code>（需要先进入滚动模式）</p>
+</blockquote>
+
+<h3 id="编辑">编辑</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">ddp</code></td>
+      <td>上下两行交换，实际上就是 <code class="highlighter-rouge">dd</code> + <code class="highlighter-rouge">p</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">J</code></td>
+      <td>将当前行和下一行用空格连成一行</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Jx</code></td>
+      <td>将当前行和下一行直接连成一行，相当于在下一行的行首按 <code class="highlighter-rouge">&lt;Backspace&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="其他">其他</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">:help</code></td>
+      <td>查看帮助文档</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">:help :{command}</code></td>
+      <td>查看一个具体命令的帮助文档，如 <code class="highlighter-rouge">:help :q</code> 查看 <code class="highlighter-rouge">:q</code> 的帮助文档</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">^y$</code></td>
+      <td>复制一行</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ggyG</code></td>
+      <td>复制整个文件</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">q:</code></td>
+      <td>查看历史命令，上下选择，按 <code class="highlighter-rouge">i</code> 编辑，回车执行，<code class="highlighter-rouge">:q</code>退出</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="附录-2vim-命令">附录 2：vim 命令</h2>
+<p>可以在 vim 标准模式下输入 <code class="highlighter-rouge">:&lt;command&gt;</code> 执行，也可以写入配置文件。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set number     # 显示行号
+
+set ignorecase # 大小写不敏感查找
+set smartcase  # 如果有一个大写字母，则切换到大小写敏感查找
+
+imap ii &lt;Esc&gt;  # 在插入模式下，映射 ii 到 &lt;Esc&gt;
+
+# 在标准模式下，禁用方向键
+map &lt;Left&gt; &lt;Nop&gt;
+map &lt;Right&gt; &lt;Nop&gt;
+map &lt;Up&gt; &lt;Nop&gt;
+map &lt;Down&gt; &lt;Nop&gt;
+
+set paste # 进入粘贴模式，这可以避免粘贴多行代码时被自动缩进
+set nopaste # 粘贴完之后，执行这条命令退出粘贴模式
+</code></pre></div></div>
+
+  </div>
+
+  <a class="u-url" href="/2021/vim.html" hidden></a>
+</article>
+
+<div class="ant-alert mb-0">
+  <ul>
+    <li>
+		本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
+	</li>
+    <li>发表于 2021-01-26
+    </li>
+  </ul>
+  
+</div>
+
+<div class="page-navigation">
+   
+  <a class="next" href="/2019/block-non-blocking-sync-async.html">下一篇 &raquo;</a>
+  
+</div>
+        </div>
+    </main><footer class="site-footer h-card">
+    <data class="u-url" href="/"></data>
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <ul class="contact-list">
+            <li class="p-name"><a class="black-link" href="http://localhost:4000/about.html">
+                  ooTao 
+                </a></li><li>
+              <a class="u-email black-link" href="mailto:17687168561@163.com">17687168561@163.com</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <a class="text-gray-300 text-sm" href="https://beian.miit.gov.cn">滇ICP备2022002272号</a>
+    </div>
+  </footer>
+
+  <!-- highlight js -->
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-chtml.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script><!-- gitalk --><!-- viewerjs -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.4/dist/viewer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.4/dist/viewer.min.js"></script>
+  <script>
+    var el = document.getElementById('post');
+    if (el) new Viewer(el);
+  </script>
+
+  
+  <!-- google analytics --><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="ooTao&apos; Blog" /></body>
+</html>

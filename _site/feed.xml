@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-04-23T21:27:18+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ooTao’ Blog</title><subtitle>About
+</subtitle><author><name>ooTao</name></author><entry><title type="html">💻【Linux】Vim 入门笔记</title><link href="http://localhost:4000/2021/vim.html" rel="alternate" type="text/html" title="💻【Linux】Vim 入门笔记" /><published>2021-01-26T02:00:00+08:00</published><updated>2021-01-26T02:00:00+08:00</updated><id>http://localhost:4000/2021/vim</id><content type="html" xml:base="http://localhost:4000/2021/vim.html"><![CDATA[<h2 id="为什么要学习-vim">为什么要学习 vim</h2>
+
+<p>最近遇到在服务端编辑代码文件、查日志的场景比较多，所以想要系统学习一下 vim。</p>
+
+<p>Vim 对于每个服务端开发人员都不陌生，这可能是我们接触最多的 Linux 软件。所有类 Unix 的系统（Linux、Mac）都安装了 vim。当我们通过终端操作文本时，vim 或许是我们唯一的选择。</p>
+
+<p>然而，vim 的使用方式和我们所熟悉的可视化编辑器完全不同，它的的快捷键是如此奇怪，不易上手。因此除非兴趣使然，我们很少会主动学习 vim。它的上限够高，下限也足够低，只需要掌握最基本的操作：<code class="highlighter-rouge">↑↓←→</code>、<code class="highlighter-rouge">i</code>、<code class="highlighter-rouge">&lt;ESC&gt;</code>、<code class="highlighter-rouge">:wq</code>，就可以覆盖大部分使用场景。那为什么还需要再深入学习 vim 呢？</p>
+
+<p>主要原因是：<strong>用较少的学习成本，换来较大的效率提升</strong>。Vim 常用的几个快捷键，可以在手指不离开键盘热区的情况下快速定位光标或编辑内容，这些内容的学习成本并不高。如果你开发运维的过程中和 vim 打交道的次数越来越多，掌握这些技巧可以极大的提升开发效率。即使现在没有需求，也可以提前上手这个强大的工具。</p>
+
+<h2 id="为什么要写这篇文章">为什么要写这篇文章</h2>
+<p>现有的 vim 教程 / 文章大多直接罗列完整的 vim 快捷键列表，让人不知从何下手。我认为应当先掌握最重要的、最高频的快捷键，满足日常开发所需；其他低频使用的快捷键，可以作为一个速查表按需查看，vim 的进阶用法也可以之后再深入研究。</p>
+
+<p>因此，我尝试作为一个 vim 初学者，总结 vim 主要和次要的快捷键，同时提供一些学习 vim 的资源。</p>
+
+<p>注意：在阅读本文时，你随时可以在终端执行 <code class="highlighter-rouge">vimtutor</code>，打开一个教程文本文件，尝试某个快捷键或命令。</p>
+
+<h2 id="学习资源">学习资源</h2>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=ER5JYFKkYDg">The Vim Tutorial Part One - Youtube</a>, <a href="https://www.youtube.com/watch?v=tExTz7GnpdQ&amp;t=467s">Part Two</a>：看英文字幕比较吃力的话，可以直接看本文</li>
+  <li>vimtutor：安装 vim 后自带的教程，在终端执行 <code class="highlighter-rouge">vimtutor</code> 即可打开，mac 系统下是中文文档<br />
+<img src="/media/16114169033178.jpg" alt="-w1439" /></li>
+  <li><a href="https://vim-adventures.com/">Vim Adventure</a>：以游戏的方式学习 vim</li>
+</ul>
+
+<blockquote>
+  <p>这里顺便再推荐一些可视化学习资源：</p>
+  <ul>
+    <li>数据结构与算法：<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Data Structure Visualization</a>、<a href="https://visualgo.net/zh">Visualgo</a></li>
+    <li>正则表达式：<a href="https://regexper.com/">regexper</a></li>
+    <li>Git：<a href="https://learngitbranching.js.org/?demo=&amp;locale=zh_CN">Learn Git Branching</a>（强烈推荐）、<a href="http://git-school.github.io/visualizing-git/">Visualizing Git</a></li>
+  </ul>
+</blockquote>
+
+<h2 id="入门">入门</h2>
+<h3 id="标准模式--插入模式">标准模式 / 插入模式</h3>
+<ul>
+  <li>标准模式（Normal Mode）：进入 vim 的默认模式，这个模式下按下任何键不会实际输入到文本中，按下 <code class="highlighter-rouge">:</code> 可以执行命令</li>
+  <li>插入模式（Insert Mode）：在标准模式按下 <code class="highlighter-rouge">i</code> 进入插入模式，此时可以输入文本；按下 <code class="highlighter-rouge">&lt;ESC&gt;</code> 退出插入模式</li>
+</ul>
+
+<p>可以配置 <code class="highlighter-rouge">ii</code> 退出插入模式，这样左手不需要移动到最左上角去按下 <code class="highlighter-rouge">&lt;ESC&gt;</code>。在标准模式下执行：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>imap ii &lt;Esc&gt;
+</code></pre></div></div>
+
+<p>可以将这条命令写到 vim 的<a href="#conf">配置文件</a>中。这条配置只会影响需要输入<em>连续的</em>两个 <code class="highlighter-rouge">i</code> 的场景：如果想要输入连续的两个 <code class="highlighter-rouge">i</code>，必须在按下第一个 <code class="highlighter-rouge">i</code> 之后稍等一会儿，再按第二个 <code class="highlighter-rouge">i</code>。不过英文中很少有单词包含连续的两个 <code class="highlighter-rouge">i</code>，所以影响可以忽略。</p>
+
+<h3 id="执行命令command">执行命令：<code class="highlighter-rouge">:&lt;command&gt;</code></h3>
+<p>按下 <code class="highlighter-rouge">:</code> 后输入命令，按回车执行。如 <code class="highlighter-rouge">:set number</code> 会显示行号。</p>
+
+<h3 id="退出-vimq--zz">退出 vim：<code class="highlighter-rouge">:q</code> / <code class="highlighter-rouge">ZZ</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">:q</code> / <code class="highlighter-rouge">:quit</code>：退出 vim，不作任何改动</li>
+  <li><code class="highlighter-rouge">:q!</code>：退出 vim，丢弃已有的改动</li>
+  <li><code class="highlighter-rouge">:wq</code>：保存更改（write）并退出（quit）vim</li>
+  <li><code class="highlighter-rouge">ZZ</code>：等同于 <code class="highlighter-rouge">:wq</code>，这个快捷键输入比 <code class="highlighter-rouge">:wq</code> 更快，注意是大写 <code class="highlighter-rouge">Z</code></li>
+</ul>
+
+<h3 id="保存文件-w--w-filename">保存文件: <code class="highlighter-rouge">:w</code> / <code class="highlighter-rouge">:w &lt;filename&gt;</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">:w</code>：保存更改</li>
+  <li><code class="highlighter-rouge">:w &lt;filename&gt;</code>：保存到一个新的文件
+    <h3 id="基本移动h--j--k--l">基本移动：<code class="highlighter-rouge">h</code> / <code class="highlighter-rouge">j</code> / <code class="highlighter-rouge">k</code> / <code class="highlighter-rouge">l</code></h3>
+    <p>使用 <code class="highlighter-rouge">h</code>、<code class="highlighter-rouge">j</code>、<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">l</code> 而不是 <code class="highlighter-rouge">←</code>、<code class="highlighter-rouge">↓</code>、<code class="highlighter-rouge">→</code>、<code class="highlighter-rouge">↑</code>，这能够避免将手指移出键盘热区再移回来。如果有必要的话，甚至可以禁用方向键，来强制自己使用 <code class="highlighter-rouge">h</code>、<code class="highlighter-rouge">j</code>、<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">l</code>：</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>map &lt;Left&gt; &lt;Nop&gt;
+map &lt;Right&gt; &lt;Nop&gt;
+map &lt;Up&gt; &lt;Nop&gt;
+map &lt;Down&gt; &lt;Nop&gt;
+</code></pre></div></div>
+
+<h3 id="前往第一行--最后一行gg--g">前往第一行 / 最后一行：<code class="highlighter-rouge">gg</code> / <code class="highlighter-rouge">G</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">gg</code>：前往第一行</li>
+  <li><code class="highlighter-rouge">1G</code>：同 <code class="highlighter-rouge">gg</code></li>
+  <li><code class="highlighter-rouge">G</code>：前往最后一行</li>
+</ul>
+
+<h3 id="向右移动一个单词w--e">向右移动一个单词：<code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">e</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">w</code>：向右移动一个单词，光标将落在下一个单词的首字符</li>
+  <li><code class="highlighter-rouge">e</code>：向右移动一个单词，光标将落在当前一个单词的最后一个字符</li>
+</ul>
+
+<p>在这里，连续的「数字+字母」、「特殊字符」视为一个单词。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>↓ 光标在这里
+Hello, world!
+     ↑ 按下 w
+    ↑ 按下 e
+Hello, world!
+       ↑ 按两下 w
+     ↑ 按两下 e
+</code></pre></div></div>
+
+<p>类似的还有 <code class="highlighter-rouge">W</code> / <code class="highlighter-rouge">E</code>，区别在于这两个快捷键将「空格」作为单词的分隔符。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>↓ 光标在这里
+Hello, world!
+       ↑ 按下 W
+     ↑ 按下 E
+Hello, world!
+            ↑ 按两下 E
+↑ 按两下 W 会移动到下一行
+</code></pre></div></div>
+
+<h3 id="向左移动一个单词b">向左移动一个单词：<code class="highlighter-rouge">b</code></h3>
+<p><code class="highlighter-rouge">b</code> 向左移动到前一个单词的首字符，相当于是 <code class="highlighter-rouge">w</code> 的逆操作。<code class="highlighter-rouge">b</code> 取 backwards 首字母，「单词」的定义同 <code class="highlighter-rouge">w</code>。</p>
+
+<p><code class="highlighter-rouge">2b</code> 向左移动两个单词，<code class="highlighter-rouge">nb</code> 向左移动 n 个单词。</p>
+
+<p><code class="highlighter-rouge">B</code> 向左移动一个单词，将「空格」作为单词的分隔符（同 <code class="highlighter-rouge">W</code>、<code class="highlighter-rouge">E</code>）。</p>
+
+<blockquote>
+  <p>单词移动类快捷键速记：web。</p>
+</blockquote>
+
+<h3 id="移动到前一个单词的末尾ge">移动到前一个单词的末尾：<code class="highlighter-rouge">ge</code></h3>
+<p><code class="highlighter-rouge">ge</code> 移动到前一个单词的末尾，<code class="highlighter-rouge">gE</code> 将空格作为单词的分隔符。</p>
+
+<h3 id="前往当前行第一个--最后一个字符0--">前往当前行第一个 / 最后一个字符：<code class="highlighter-rouge">0</code> / <code class="highlighter-rouge">$</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">0</code>：前往第一个字符，可以理解成是第 0 列</li>
+  <li><code class="highlighter-rouge">$</code>：前往最后一个字符</li>
+</ul>
+
+<h3 id="删除字符x--x">删除字符：<code class="highlighter-rouge">x</code> / <code class="highlighter-rouge">X</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">x</code>：删除当前字符，等同于 <code class="highlighter-rouge">&lt;Delete&gt;</code></li>
+  <li><code class="highlighter-rouge">X</code>：删除前一个字符</li>
+</ul>
+
+<h3 id="删除单词dw">删除单词：<code class="highlighter-rouge">dw</code></h3>
+<p>「单词」的定义同 <code class="highlighter-rouge">w</code>，单词后面的任意多个空格将被删除。</p>
+
+<p>类似的还有 <code class="highlighter-rouge">dW</code>，删除下一个空格前的单词。</p>
+
+<h3 id="删除当前行dd">删除当前行：<code class="highlighter-rouge">dd</code></h3>
+<p>略。</p>
+
+<h3 id="在当前位置后面插入a">在当前位置后面插入：<code class="highlighter-rouge">a</code></h3>
+<p><code class="highlighter-rouge">i</code> 在当前位置前面插入（insert），<code class="highlighter-rouge">a</code> 在当前位置后面插入（append）。</p>
+
+<h3 id="在当前行开始--末尾插入i--a">在当前行开始 / 末尾插入：<code class="highlighter-rouge">I</code> / <code class="highlighter-rouge">A</code></h3>
+<p>略。</p>
+
+<h3 id="在当前行下面--上面插入新行o--o">在当前行下面 / 上面插入新行：<code class="highlighter-rouge">o</code> / <code class="highlighter-rouge">O</code></h3>
+<p>插入新的空白行。</p>
+
+<h3 id="撤销--重做u--ctrl--r">撤销 / 重做：<code class="highlighter-rouge">u</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + r</code></h3>
+<ul>
+  <li><code class="highlighter-rouge">u</code>：撤销（undo）</li>
+  <li><code class="highlighter-rouge">&lt;Ctrl&gt; + r</code>：重做（redo）</li>
+</ul>
+
+<h2 id="中场休息vim-的一些模式">中场休息：vim 的一些模式</h2>
+<h3 id="重复-n-次操作nkey">重复 n 次操作：<code class="highlighter-rouge">n&lt;key&gt;</code></h3>
+<p>Vim 中几乎所有操作都可以通过一个 <code class="highlighter-rouge">n</code> 前缀来重复 n 次：</p>
+
+<ul>
+  <li>多次方向移动：<code class="highlighter-rouge">nh</code> / <code class="highlighter-rouge">nj</code> / <code class="highlighter-rouge">nk</code> / <code class="highlighter-rouge">nl</code>。<code class="highlighter-rouge">5h</code> 向左移动 5 个字符，<code class="highlighter-rouge">5j</code> 向下移动 5 行。</li>
+  <li>向左移动多个单词：<code class="highlighter-rouge">nb</code>。<code class="highlighter-rouge">2b</code> 向左移动两个单词。</li>
+  <li>前往第 n 行：<code class="highlighter-rouge">nG</code>。<code class="highlighter-rouge">1G</code> 可以前往第一行，就是这个原理。如果希望在 vim 中显示行号，可以在标准模式下执行 <code class="highlighter-rouge">set number</code> 命令，也可以将这条命令写到 vim 的<a href="#conf">配置文件</a>中。</li>
+  <li>删除多个字符：<code class="highlighter-rouge">nx</code>。<code class="highlighter-rouge">2x</code> 删除两个字符，<code class="highlighter-rouge">2X</code> 向左删除两个字符。</li>
+  <li>
+    <p>移动多个单词：<code class="highlighter-rouge">nw</code> / <code class="highlighter-rouge">ne</code>。<code class="highlighter-rouge">2w</code> / <code class="highlighter-rouge">2e</code> 向右移动两个单词，等同于按两次 <code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">e</code>，示例：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ↓ 光标在这里
+  Hello, world!
+         ↑ 按下 2w
+       ↑ 按下 2e
+</code></pre></div>    </div>
+  </li>
+  <li>删除多个单词：<code class="highlighter-rouge">dnw</code> / <code class="highlighter-rouge">ndw</code>。<code class="highlighter-rouge">d2w</code> / <code class="highlighter-rouge">2dw</code> 删除光标后的两个单词。类似的还有 <code class="highlighter-rouge">dnW</code>，删除后面第 n 个空格之前的单词。</li>
+  <li>删除多个行：<code class="highlighter-rouge">dnd</code> / <code class="highlighter-rouge">ndd</code>。<code class="highlighter-rouge">d2d</code> / <code class="highlighter-rouge">2dd</code> 都可以删除光标开始的两行。</li>
+  <li>多次撤销：<code class="highlighter-rouge">nu</code>。<code class="highlighter-rouge">2u</code> 撤销前两步操作，等同于按两次 <code class="highlighter-rouge">u</code>。</li>
+  <li>多次重做 / <code class="highlighter-rouge">n&lt;Ctrl&gt; + r</code>。<code class="highlighter-rouge">2&lt;Ctrl&gt; + r</code> 重做被撤销的两步操作，等同于按两次 <code class="highlighter-rouge">&lt;Ctrl&gt; + r</code>。</li>
+</ul>
+
+<h3 id="删除一个范围的内容drange">删除一个范围的内容：<code class="highlighter-rouge">d&lt;range&gt;</code></h3>
+<p><code class="highlighter-rouge">d</code> 可以和<strong>任意</strong>光标移动的操作符结合，来删除一个<strong>范围</strong>的内容。</p>
+
+<p>这里，我们先明确一下「范围」的定义：</p>
+<ul>
+  <li>对于单词级别的移动，这个范围将是光标前后所处的位置对应的<strong>左闭右开</strong>的区间（<code class="highlighter-rouge">$</code> 是个例外）</li>
+  <li>对于行级别的移动，这个范围将是光标前后所处的位置之间的所有行，<strong>包含</strong>光标所在的两个行</li>
+</ul>
+
+<p>而且，<code class="highlighter-rouge">d</code> 可以向任意方向进行删除，都符合上述约定。</p>
+
+<p>可以打开 <code class="highlighter-rouge">vimtutor</code> 尝试一下这些命令，就可以理解上述“范围”的含义：</p>
+<ul>
+  <li><code class="highlighter-rouge">dw</code>：删除下一个单词，不会删除 <code class="highlighter-rouge">w</code> 跳转到的那个字符</li>
+  <li><code class="highlighter-rouge">db</code>：删除前一个单词，不会删除光标一开始指向的那个字符</li>
+  <li><code class="highlighter-rouge">d0</code>：删除当前位置到行开头的所有内容，不会删除光标一开始指向的那个字符</li>
+  <li><code class="highlighter-rouge">dG</code>：删除当前行到文件末尾的所有内容，包含当前行在内也会被删除</li>
+  <li><code class="highlighter-rouge">dgg</code>：删除当前行到文件开头的所有内容，包含当前行在内也会被删除，<code class="highlighter-rouge">d1G</code> 可以达到相同的效果</li>
+</ul>
+
+<p><code class="highlighter-rouge">$</code> 是一个例外，<code class="highlighter-rouge">d$</code> 会删除当前位置到行末尾的所有内容，包含行末尾在内的字符也都会被删除。</p>
+
+<p>这些命令不用可以去记，只需要记住上面「范围」的规则即可。比如 <code class="highlighter-rouge">3G</code> 会跳到第 3 行，那么 <code class="highlighter-rouge">d3G</code> 将删除当前行到第 3 行的所有内容，包括第 3 行；<code class="highlighter-rouge">j</code> 下移一行，那么 <code class="highlighter-rouge">dj</code> 将删除当前行和下一行，<code class="highlighter-rouge">d2j</code> 将删除当前行开始的 3 行内容；<code class="highlighter-rouge">dh</code>、<code class="highlighter-rouge">dl</code> 分别等价于 <code class="highlighter-rouge">x</code>、<code class="highlighter-rouge">X</code>…… 理解之后，你就可以做到举一反三了。</p>
+
+<p>最后再补充一下：<code class="highlighter-rouge">d</code> 和数字 <code class="highlighter-rouge">n</code> 可以组合在一起使用。<code class="highlighter-rouge">d</code> 表示删除元素，<code class="highlighter-rouge">n</code> 表示后面的命令重复 n 次。这两个命令以不同顺序组合也能达到相同的效果，比如 <code class="highlighter-rouge">d2w</code> 和 <code class="highlighter-rouge">2dw</code> 都是删除后两个单词。但我个人认为，这两个命令在语义上有区别：<code class="highlighter-rouge">d2w</code> 表示删除 <code class="highlighter-rouge">2w</code> 范围的内容，而 <code class="highlighter-rouge">2dw</code> 表示 <code class="highlighter-rouge">dw</code> 命令重复 2 次。</p>
+
+<blockquote>
+  <p>在 vim 术语中，将 <code class="highlighter-rouge">d</code> 后面的操作称为 <code class="highlighter-rouge">[number]</code> 与 <code class="highlighter-rouge">motion</code>，其中 <code class="highlighter-rouge">number</code> 是可选的。
+比如 <code class="highlighter-rouge">d2w</code> 中，<code class="highlighter-rouge">2</code> 就是 <code class="highlighter-rouge">number</code>，<code class="highlighter-rouge">w</code> 是 <code class="highlighter-rouge">motion</code>。
+本文为了便于理解，统称其为 <code class="highlighter-rouge">range</code>。</p>
+</blockquote>
+
+<h3 id="快捷键的小写和大写">快捷键的小写和大写</h3>
+<blockquote>
+  <p>部分快捷键见「进阶」一节</p>
+</blockquote>
+
+<p>不同的方向：</p>
+<ul>
+  <li><code class="highlighter-rouge">x</code> 向右、<code class="highlighter-rouge">X</code> 向左</li>
+  <li><code class="highlighter-rouge">p</code> 向下、<code class="highlighter-rouge">P</code> 向上</li>
+  <li><code class="highlighter-rouge">o</code> 向下、<code class="highlighter-rouge">O</code> 向上</li>
+  <li><code class="highlighter-rouge">f</code> 向右、<code class="highlighter-rouge">F</code> 向左</li>
+</ul>
+
+<p>更严格的条件：</p>
+<ul>
+  <li><code class="highlighter-rouge">w</code> 将特殊字符作为独立单词，<code class="highlighter-rouge">W</code> 只将空格作为单词分隔符</li>
+  <li><code class="highlighter-rouge">e</code> / <code class="highlighter-rouge">E</code>、<code class="highlighter-rouge">b</code> / <code class="highlighter-rouge">B</code> 同理</li>
+</ul>
+
+<p>更大的范围：</p>
+<ul>
+  <li><code class="highlighter-rouge">a</code> 在当前位置后面插入、<code class="highlighter-rouge">A</code> 在当前行末尾插入</li>
+  <li><code class="highlighter-rouge">i</code> 在当前位置前插入、<code class="highlighter-rouge">I</code> 在当前行开始插入</li>
+  <li><code class="highlighter-rouge">d</code> 删除一个范围、<code class="highlighter-rouge">D</code> 删除到行末尾</li>
+  <li><code class="highlighter-rouge">c</code> 删除一个范围、<code class="highlighter-rouge">C</code> 删除到行末尾，并进入编辑模式</li>
+  <li><code class="highlighter-rouge">s</code> 删除当前字符，并进入编辑模式；<code class="highlighter-rouge">S</code> 删除当前整行，并进入编辑模式</li>
+</ul>
+
+<p>连续操作：</p>
+<ul>
+  <li><code class="highlighter-rouge">r</code> 替换一个字符、<code class="highlighter-rouge">R</code> 连续替换多个字符直到按下 <code class="highlighter-rouge">&lt;Esc&gt;</code></li>
+</ul>
+
+<h3 id="跨越多行选择内容v-进入可视模式">跨越多行选择内容：<code class="highlighter-rouge">v</code> 进入可视模式</h3>
+<p>按下 <code class="highlighter-rouge">v</code> 进入可视模式（visual mode），然后移动光标以选择文本：</p>
+<ul>
+  <li>按下 <code class="highlighter-rouge">y</code> 可以复制选中的文本</li>
+  <li>按下 <code class="highlighter-rouge">d</code> 可以删除选中的文本，按下 <code class="highlighter-rouge">p</code> 放置（粘贴）这些文本，这就实现了<strong>剪切</strong>功能</li>
+</ul>
+
+<p><img src="/media/vim-visual-mode.gif" alt="vim-visual-mode" /></p>
+
+<h2 id="进阶">进阶</h2>
+<h3 id="替换一个字符r">替换一个字符：<code class="highlighter-rouge">r</code></h3>
+<p><code class="highlighter-rouge">r</code>：再按下任意键，替换（replace）当前字符，等同于 <code class="highlighter-rouge">x</code> + <code class="highlighter-rouge">i</code>。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ↓ 光标在这里
+Helle, world!
+# 先按 r，再按 o
+Hello, world!
+    ↑ 光标在这里
+</code></pre></div></div>
+
+<h3 id="替换连续多个字符r">替换连续多个字符：<code class="highlighter-rouge">R</code></h3>
+<p><code class="highlighter-rouge">R</code>：替换连续的多个字符，按下 <code class="highlighter-rouge">&lt;Esc&gt;</code> 可以退出替换模式。</p>
+
+<h3 id="更改一个范围的内容c">更改一个范围的内容：<code class="highlighter-rouge">c</code></h3>
+<p><code class="highlighter-rouge">c</code> 取 change 的首字母，这个命令的便捷之处在于将「删除操作」和「进入编辑模式」合二为一，可以少按一个键。</p>
+<ul>
+  <li><code class="highlighter-rouge">cw</code>：更改下一个单词，等同于 <code class="highlighter-rouge">dw</code> + <code class="highlighter-rouge">i</code></li>
+  <li><code class="highlighter-rouge">c2w</code>：更改后两个单词，等同于 <code class="highlighter-rouge">d2w</code> + <code class="highlighter-rouge">i</code></li>
+  <li><code class="highlighter-rouge">c$</code>：更改从当前位置到行结束的所有内容，等同于 <code class="highlighter-rouge">d$</code> + <code class="highlighter-rouge">i</code></li>
+</ul>
+
+<p>和 <code class="highlighter-rouge">d</code> 一样，<code class="highlighter-rouge">c</code> 也可以和任意光标移动的操作符结合，来更改一个范围的内容。</p>
+
+<h3 id="复制当前行yy">复制当前行：<code class="highlighter-rouge">yy</code></h3>
+<p><code class="highlighter-rouge">yy</code> 复制当前行，<code class="highlighter-rouge">p</code> 粘贴到目标位置。</p>
+
+<p><code class="highlighter-rouge">nyy</code> 复制当前行向下的多行。</p>
+
+<h3 id="粘贴到下一行--上一行p--p">粘贴到下一行 / 上一行：<code class="highlighter-rouge">p</code> / <code class="highlighter-rouge">P</code></h3>
+<p>如上所述，<code class="highlighter-rouge">p</code> 粘贴到目标位置。</p>
+
+<p>通过 <code class="highlighter-rouge">dd</code> 删除某一行后，也可以按下 <code class="highlighter-rouge">p</code>，将删除掉的内容放置到当前光标位置下一行。注意这里是「放置」而不是「粘贴」，因为 <code class="highlighter-rouge">dd</code> 将被删除的行保存到了缓冲区，而 <code class="highlighter-rouge">p</code> 其实是将缓冲区的内容放置到当前位置，所以 <code class="highlighter-rouge">p</code> 取 put 的首字母，而非 paste。</p>
+
+<p>同理，<code class="highlighter-rouge">yy</code> 将当前行保存到缓冲区，但不删除。这样 <code class="highlighter-rouge">yy</code> + <code class="highlighter-rouge">p</code> 就可以实现“复制-粘贴”的操作。</p>
+
+<p>大写 <code class="highlighter-rouge">P</code> 粘贴到上一行。</p>
+
+<h3 id="移动到下一个指定字符ftarget">移动到下一个指定字符：<code class="highlighter-rouge">f&lt;target&gt;</code></h3>
+<p><code class="highlighter-rouge">ft</code> 移动到下一个 <code class="highlighter-rouge">t</code> 出现的位置，<code class="highlighter-rouge">f2</code> 移动到下一个 <code class="highlighter-rouge">2</code> 出现的位置。<code class="highlighter-rouge">f</code> 取 forward 的首字母。</p>
+
+<p><code class="highlighter-rouge">F</code> 类似于 <code class="highlighter-rouge">f</code>，向前移动到前一个指定字符。</p>
+
+<p><code class="highlighter-rouge">t</code> 类似于 <code class="highlighter-rouge">f</code>，只不过光标会移动到下一个指定字符<strong>之前</strong>；<code class="highlighter-rouge">T</code> 类似于 <code class="highlighter-rouge">F</code>，只不过光标会移动到前一个指定字符<strong>之后</strong>。<code class="highlighter-rouge">t</code> 取 until 的含义。</p>
+
+<p>示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ↓ 光标在这里
+Hello, world!
+        ↑ fo
+         ↑ fr
+↑ Fh
+       ↑ to
+ ↑ Th
+</code></pre></div></div>
+
+<h3 id="删除当前字符并进入编辑模式s">删除当前字符，并进入编辑模式：<code class="highlighter-rouge">s</code></h3>
+<p><code class="highlighter-rouge">s</code> 等同于 <code class="highlighter-rouge">x</code> + <code class="highlighter-rouge">i</code>。</p>
+
+<h3 id="删除当前整行并进入编辑模式s">删除当前整行，并进入编辑模式：<code class="highlighter-rouge">S</code></h3>
+<p><code class="highlighter-rouge">S</code> 等同于 <code class="highlighter-rouge">dd</code> + <code class="highlighter-rouge">o</code>。</p>
+
+<h3 id="从当前位置开始向右删除整行d">从当前位置开始向右删除整行：<code class="highlighter-rouge">D</code></h3>
+<p><code class="highlighter-rouge">D</code> 等同于 <code class="highlighter-rouge">d$</code>。</p>
+
+<h3 id="从当前位置开始向右删除整行并进入编辑模式c">从当前位置开始向右删除整行，并进入编辑模式：<code class="highlighter-rouge">C</code></h3>
+<p><code class="highlighter-rouge">C</code> 等同于 <code class="highlighter-rouge">c$</code>，或者 <code class="highlighter-rouge">d$</code> + <code class="highlighter-rouge">a</code>，或者 <code class="highlighter-rouge">D</code> + <code class="highlighter-rouge">a</code>。</p>
+
+<h3 id="复制下一个单词yw">复制下一个单词：<code class="highlighter-rouge">yw</code></h3>
+<p><code class="highlighter-rouge">y</code> 取 yank（复制）的首字母。<code class="highlighter-rouge">yw</code> 复制下一个单词，<code class="highlighter-rouge">p</code> 可以将其粘贴（put）到指定位置。</p>
+
+<p>事实上，<code class="highlighter-rouge">y</code> 和 <code class="highlighter-rouge">c</code>、<code class="highlighter-rouge">d</code> 一样，可以和任意光标移动的操作符结合，来复制一个范围的内容。比如 <code class="highlighter-rouge">y$</code> 将复制当前位置到行末尾的全部内容，<code class="highlighter-rouge">yh</code> 将复制光标前面的字符，<code class="highlighter-rouge">yG</code> 复制光标所在行到最后一行的所有内容。</p>
+
+<p>最后，<code class="highlighter-rouge">yy</code> 复制当前行，可以和 <code class="highlighter-rouge">dd</code> 一起理解 —— <code class="highlighter-rouge">dd</code> 删除一整行，快捷键重复表示操作的是<strong>一整行</strong>，不管光标位置在哪里。第二个 <code class="highlighter-rouge">y</code> 和 <code class="highlighter-rouge">d</code> 并没有语义上的含义。</p>
+
+<h3 id="当前行置顶zt">当前行置顶：<code class="highlighter-rouge">zt</code></h3>
+<p><code class="highlighter-rouge">zt</code> 把当前行置于屏幕顶端。<code class="highlighter-rouge">z</code> 字取其象形意义，模拟一张纸的折叠变形。<code class="highlighter-rouge">t</code> 取 top 的首字母。</p>
+
+<p><code class="highlighter-rouge">zz</code> 将当前行置于屏幕中央。<code class="highlighter-rouge">zb</code> 将当前行置于屏幕底端，<code class="highlighter-rouge">b</code> 取 bottom 的首字母。</p>
+
+<h2 id="高级">高级</h2>
+
+<h3 id="查找文档中的关键字pattern">查找文档中的关键字：<code class="highlighter-rouge">/&lt;pattern&gt;</code></h3>
+<p><code class="highlighter-rouge">/</code> 从光标所在位置向后查找关键字，<code class="highlighter-rouge">n</code> / <code class="highlighter-rouge">N</code> 查找下一个 / 上一个匹配的位置。</p>
+
+<p><code class="highlighter-rouge">?</code> 向前查找，不过很少使用。如果想向前查找的话，使用 <code class="highlighter-rouge">/</code> + <code class="highlighter-rouge">N</code> 就可以了。</p>
+
+<p><code class="highlighter-rouge">q/</code>、<code class="highlighter-rouge">q?</code> 可以列出 <code class="highlighter-rouge">/</code>、<code class="highlighter-rouge">?</code> 的查找历史，上下选择，按 <code class="highlighter-rouge">i</code> 编辑，回车执行，<code class="highlighter-rouge">:q</code>退出。</p>
+
+<p><code class="highlighter-rouge">&lt;pattern&gt;</code> 可以是正则表达式，比如 <code class="highlighter-rouge">/vim$</code> 查找位于行尾的 <code class="highlighter-rouge">vim</code>。查找特殊字符时需要转义，比如 <code class="highlighter-rouge">/vim\$</code> 查找 <code class="highlighter-rouge">vim$</code>。</p>
+
+<p>在查找模式中加入 <code class="highlighter-rouge">\c</code> 表示大小写不敏感查找，<code class="highlighter-rouge">\C</code> 表示大小写敏感，比如 <code class="highlighter-rouge">/foo\c</code> 会查找 <code class="highlighter-rouge">foo</code>、<code class="highlighter-rouge">Foo</code> 等。默认是大小写敏感，可以执行 <code class="highlighter-rouge">:set ignorecase</code> 或写入<a href="#conf">配置文件</a>设置大小写不敏感为默认的查找模式。</p>
+
+<p>查找相关命令：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set ic // 等价于 set ignorecase
+set hls is // 高亮匹配项
+nohlsearch // 移除匹配项的高亮显示
+</code></pre></div></div>
+
+<h3 id="查找当前光标对应的完整单词">查找当前光标对应的完整单词：<code class="highlighter-rouge">*</code></h3>
+<p>示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ↓ 光标在这里
+Hello, world!
+</code></pre></div></div>
+
+<p>此时按下<code class="highlighter-rouge">*</code>，将查找 <code class="highlighter-rouge">Hello</code> 这个单词，并且要求 <code class="highlighter-rouge">Hello</code> 出现位置的前后均为空白字符或标点符号，即查找完整独立的单词。</p>
+
+<h3 id="在代码块匹配的括号之间跳转">在代码块匹配的括号之间跳转：<code class="highlighter-rouge">%</code></h3>
+<p><code class="highlighter-rouge">%</code> 在匹配的括号之间跳转。需要将光标放在 <code class="highlighter-rouge">{}[]()</code> 上，然后按 <code class="highlighter-rouge">%</code>。 如果光标所在的位置不是 <code class="highlighter-rouge">{}[]()</code>，那么会向右查找第一个 <code class="highlighter-rouge">{}[]()</code>。</p>
+
+<h3 id="光标跳转到前一个位置--后一个位置ctrl--o--ctrl--i">光标跳转到前一个位置 / 后一个位置：<code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + i</code></h3>
+<p>在标准模式下，<code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> 将光标跳转到前一个位置，<code class="highlighter-rouge">&lt;Ctrl&gt; + i</code> 跳转到后一个位置。</p>
+
+<p>注意这里使用的是“跳转”。<code class="highlighter-rouge">h</code> / <code class="highlighter-rouge">j</code>/ <code class="highlighter-rouge">k</code> / <code class="highlighter-rouge">l</code> / <code class="highlighter-rouge">w</code> 等移动将不会记录在「跳转表」中，只有通过 <code class="highlighter-rouge">gg</code> / <code class="highlighter-rouge">nG</code> / 查找时的 <code class="highlighter-rouge">n</code> / <code class="highlighter-rouge">N</code> 等命令执行的跳转操作，才可以通过 <code class="highlighter-rouge">&lt;Ctrl&gt; + o</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + i</code> 来回跳转。</p>
+
+<blockquote>
+  <p>补充：</p>
+  <ul>
+    <li>在 VS Code 中，向前一个 / 后一个位置跳转的快捷键是 <code class="highlighter-rouge">&lt;Ctrl&gt; + [</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + ]</code>。</li>
+    <li>在 Intellij 等 Jetbrains 系列软件中，向前一个 / 后一个位置跳转的快捷键是 <code class="highlighter-rouge">&lt;Command&gt; + [</code> / <code class="highlighter-rouge">&lt;Command&gt; + ]</code>。如果不是，可以在 <code class="highlighter-rouge">Preferences</code> 中搜索 <code class="highlighter-rouge">back</code>，然后在 <code class="highlighter-rouge">KeyMap -&gt; Main menu -&gt; Navigate -&gt; Back</code> 中设置。</li>
+  </ul>
+</blockquote>
+
+<h3 id="替换文本rangesoldnewflag">替换文本：<code class="highlighter-rouge">:{range}s/{old}/{new}/{flag}</code></h3>
+<p><code class="highlighter-rouge">:s</code>（substitute）命令用来查找和替换文本。语法如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:{range}s/{old}/{new}/{flag}
+</code></pre></div></div>
+
+<p>表示在指定范围 <code class="highlighter-rouge">range</code> 内查找字符串 <code class="highlighter-rouge">old</code> 并替换为 <code class="highlighter-rouge">bar</code>，<code class="highlighter-rouge">flag</code> 说明了替换模式，如只替换首次出现、或全部替换。</p>
+
+<h4 id="作用范围-range">作用范围 range</h4>
+<p>作用范围分为当前行、全文、行范围、选区等：</p>
+<ul>
+  <li>当前行：空白，默认，如 <code class="highlighter-rouge">:s/foo/bar/g</code></li>
+  <li>全文：<code class="highlighter-rouge">%</code>，如 <code class="highlighter-rouge">:%s/foo/bar/g</code></li>
+  <li>n~m 行：<code class="highlighter-rouge">n,m</code>，如 <code class="highlighter-rouge">:5,12s/foo/bar/g</code> 表示 5~12 行</li>
+  <li>当前行与之后 n 行：<code class="highlighter-rouge">.,+n</code>，如 <code class="highlighter-rouge">:.,+2s/foo/bar/g</code> 表示当前行与之后 2 行</li>
+  <li>选区：略</li>
+</ul>
+
+<h4 id="替换模式-flag">替换模式 flag</h4>
+<p>替换模式：</p>
+<ul>
+  <li>空白：默认，只替换光标位置之后的首次出现，如 <code class="highlighter-rouge">:%s/foo/bar</code></li>
+  <li><code class="highlighter-rouge">g</code>：全局替换，替换每次出现（global），如 <code class="highlighter-rouge">:%s/foo/bar/g</code></li>
+  <li><code class="highlighter-rouge">i</code>：</li>
+  <li><code class="highlighter-rouge">c</code>：交互式替换，每次替换前需要用户确认（confirm），如 <code class="highlighter-rouge">:%s/foo/bar/gc</code> 表示查找全文的所有 <code class="highlighter-rouge">foo</code> 并替换为 <code class="highlighter-rouge">bar</code>，每次替换前都需要确认：
+    <ul>
+      <li>按下回车执行后，提示 <code class="highlighter-rouge">replace with bar (y/n/a/q/l/^E/^Y)?</code></li>
+      <li><code class="highlighter-rouge">y</code> 表示替换</li>
+      <li><code class="highlighter-rouge">n</code> 表示不替换</li>
+      <li><code class="highlighter-rouge">a</code> 表示替换后续所有</li>
+      <li><code class="highlighter-rouge">q</code> 表示退出查找模式</li>
+      <li><code class="highlighter-rouge">l</code> 表示替换当前位置并退出查找模式</li>
+      <li><code class="highlighter-rouge">^E</code>、<code class="highlighter-rouge">^Y</code> 用于向上、向下滚动屏幕，<code class="highlighter-rouge">^</code> 表示 <code class="highlighter-rouge">&lt;Ctrl&gt;</code> 键</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="在-vim-中执行-shell-命令command">在 vim 中执行 shell 命令：<code class="highlighter-rouge">:!&lt;command&gt;</code></h3>
+<p>比如通过 vim 编辑文本的时候，希望打印当前目录，但是又不想退出 vim，那么就可以直接在 vim 中执行：<code class="highlighter-rouge">:!pwd</code>，这等同于在 shell 中执行 <code class="highlighter-rouge">pwd</code>。</p>
+
+<h4 id="获得命令提示prefix--ctrl--d">获得命令提示：<code class="highlighter-rouge">:&lt;prefix&gt; + &lt;Ctrl&gt; + d</code></h4>
+<p>在 vim 中输入 <code class="highlighter-rouge">:</code>，再按下 <code class="highlighter-rouge">&lt;Ctrl&gt; + d</code>，将展示所有可以在 vim 中使用的命令。</p>
+
+<p>输入 <code class="highlighter-rouge">:w</code>，再按下 <code class="highlighter-rouge">&lt;Ctrl&gt; + d</code>，将展示所有可以在 vim 中使用的、以 <code class="highlighter-rouge">w</code> 开头的命令。</p>
+
+<div id="conf"></div>
+<h3 id="配置文件">配置文件</h3>
+<p>配置文件位于 <code class="highlighter-rouge">~/.vimrc</code>，其内容是若干行可在 vim 中执行的命令，会在每次打开 vim 时自动执行。示例：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set number # 显示行号
+set ignorecase # 大小写不敏感查找
+set ic // 等价于 set ignorecase
+set smartcase # 如果有一个大写字母，则切换到大小写敏感查找
+set hls is // 高亮匹配项
+nohlsearch // 移除匹配项的高亮显示
+</code></pre></div></div>
+
+<h3 id="配置插件">配置插件</h3>
+<ul>
+  <li>代码块折叠：TODO</li>
+  <li><a href="https://zhuanlan.zhihu.com/p/58816186">Vim 插件推荐</a></li>
+</ul>
+
+<h2 id="其他工具-vim-化">其他工具 Vim 化</h2>
+<ul>
+  <li>Chrome：<a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a>，通过类似 vim 风格的快捷键操作浏览器窗口</li>
+  <li>VS Code：Vim 插件，将 VS Code 的编辑器转为 vim 模式</li>
+</ul>
+
+<h2 id="总结">总结</h2>
+<p>掌握「入门」一节中的快捷键，基本可以满足大部分使用场景。如果想进一步提升效率，那么「进阶」一节中的快捷键也值得学习。「高级」一节的内容，由于我还没有将 vim 作为主力开发工具，尚未深入研究，所以等以后有机会再补充。</p>
+
+<p>可以在其他编辑器中配合 vim 插件，来培养 vim 的使用习惯。将 Chrome vim 化，也能体验到 vim 带来的酷炫与极客感。</p>
+
+<p>最后，<strong>在实践中学习命令</strong>！如果只是阅读而不尝试，那么很快就会遗忘。</p>
+
+<p>希望本文对你有帮助。</p>
+
+<h2 id="附录-1速查表">附录 1：速查表</h2>
+<p>仅作为正文的补充，记录一些可能有用的快捷键。</p>
+
+<h3 id="光标移动">光标移动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">^</code></td>
+      <td>移动到当前行第一个非空字符</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;Space&gt;</code></td>
+      <td>向右移动一个字符，等同于 <code class="highlighter-rouge">l</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&lt;Alt&gt; + ←</code>, <code class="highlighter-rouge">&lt;Alt&gt; + →</code></td>
+      <td>向左 / 向右移动一个单词，等同于 <code class="highlighter-rouge">w</code> / <code class="highlighter-rouge">b</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">:n&lt;enter&gt;</code></td>
+      <td>跳到指定行，等同于 <code class="highlighter-rouge">nG</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ngg</code></td>
+      <td>跳到指定行，等同于 <code class="highlighter-rouge">nG</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">H</code></td>
+      <td>光标移动到屏幕最上方（head）</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">M</code></td>
+      <td>光标移动到屏幕中央（middle）</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">L</code></td>
+      <td>光标移动到屏幕最下方（last）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="屏幕滚动">屏幕滚动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>向上 / 向下滚动一行</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + y</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + e</code></td>
+    </tr>
+    <tr>
+      <td>向上 / 向下滚动一页</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + f</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + b</code>（forward，backward）</td>
+    </tr>
+    <tr>
+      <td>向上 / 向下滚动半页</td>
+      <td><code class="highlighter-rouge">&lt;Ctrl&gt; + d</code> / <code class="highlighter-rouge">&lt;Ctrl&gt; + u</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>这些命令在大部分 Unix 软件中都可以使用，比如 <code class="highlighter-rouge">man</code>、<code class="highlighter-rouge">less</code>、<code class="highlighter-rouge">tmux</code>（需要先进入滚动模式）</p>
+</blockquote>
+
+<h3 id="编辑">编辑</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">ddp</code></td>
+      <td>上下两行交换，实际上就是 <code class="highlighter-rouge">dd</code> + <code class="highlighter-rouge">p</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">J</code></td>
+      <td>将当前行和下一行用空格连成一行</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Jx</code></td>
+      <td>将当前行和下一行直接连成一行，相当于在下一行的行首按 <code class="highlighter-rouge">&lt;Backspace&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="其他">其他</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>快捷键</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">:help</code></td>
+      <td>查看帮助文档</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">:help :{command}</code></td>
+      <td>查看一个具体命令的帮助文档，如 <code class="highlighter-rouge">:help :q</code> 查看 <code class="highlighter-rouge">:q</code> 的帮助文档</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">^y$</code></td>
+      <td>复制一行</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ggyG</code></td>
+      <td>复制整个文件</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">q:</code></td>
+      <td>查看历史命令，上下选择，按 <code class="highlighter-rouge">i</code> 编辑，回车执行，<code class="highlighter-rouge">:q</code>退出</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="附录-2vim-命令">附录 2：vim 命令</h2>
+<p>可以在 vim 标准模式下输入 <code class="highlighter-rouge">:&lt;command&gt;</code> 执行，也可以写入配置文件。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set number     # 显示行号
+
+set ignorecase # 大小写不敏感查找
+set smartcase  # 如果有一个大写字母，则切换到大小写敏感查找
+
+imap ii &lt;Esc&gt;  # 在插入模式下，映射 ii 到 &lt;Esc&gt;
+
+# 在标准模式下，禁用方向键
+map &lt;Left&gt; &lt;Nop&gt;
+map &lt;Right&gt; &lt;Nop&gt;
+map &lt;Up&gt; &lt;Nop&gt;
+map &lt;Down&gt; &lt;Nop&gt;
+
+set paste # 进入粘贴模式，这可以避免粘贴多行代码时被自动缩进
+set nopaste # 粘贴完之后，执行这条命令退出粘贴模式
+</code></pre></div></div>]]></content><author><name>ooTao</name></author><summary type="html"><![CDATA[为什么要学习 vim]]></summary></entry><entry><title type="html">📔【操作系统】详解阻塞、非阻塞、同步、异步</title><link href="http://localhost:4000/2019/block-non-blocking-sync-async.html" rel="alternate" type="text/html" title="📔【操作系统】详解阻塞、非阻塞、同步、异步" /><published>2019-11-15T15:00:00+08:00</published><updated>2019-11-15T15:00:00+08:00</updated><id>http://localhost:4000/2019/block-non-blocking-sync-async</id><content type="html" xml:base="http://localhost:4000/2019/block-non-blocking-sync-async.html"><![CDATA[<h2 id="从进程调度谈起">从进程调度谈起</h2>
+
+<p>现代操作系统（如 Windows、Linux 等）都是分时系统。分时系统允许同时允许多个任务，但实际上，由于一台计算机通常只有一个 CPU，所以不可能真正地同时运行多个任务。这些进程实际上是轮番运行，每个进程运行一个时间片。由于时间片通常很短，用户不会感觉到，所以这些进程看起来就像是同时运行。</p>
+
+<p>每个进程的时间片由操作系统完成初始化，所有进程轮番地执行相应的时间。具体下一个时间片轮到哪个进程来执行，是由操作系统决定的，我们把操作系统选择下一个任务的过程称为“调度”。</p>
+
+<p>当一个进程处于它的时间片时，正常情况下会独享 CPU，不断运行直到当前时间片被用完。但是让我们想象这样一个场景：当一个进程发起 <code class="highlighter-rouge">open()</code> 系统调用去读取某个文件的内容时，因为 CPU 的速度远远大于从硬件读取内容的速度，所以大部分时间 CPU 都在等待硬盘读取完成，这无疑造成了 CPU 浪费。</p>
+
+<p>因此，当某个进程发起 <code class="highlighter-rouge">open()</code>、<code class="highlighter-rouge">read()</code> 等系统调用时，OS 会<strong>阻塞</strong>这个进程，让出 CPU 去执行别的任务。而读取任务实际上由 DMA 完成，当读取完毕后，DMA 会发出一个 I/O 中断通知 OS，OS 会从暂停位置继续这个进程。</p>
+
+<p>有时候我们可能会看到这样的说法：“当某个进程发起阻塞调用时，它会被<strong>挂起</strong>”。阻塞是指进程在等待事件，暂时让出 CPU；挂起是指进程被换出到外存，等待激活。在讨论阻塞/非阻塞时，我们一般不区分“阻塞”和“挂起”，因为对进程而言，阻塞和挂起都是失去 CPU、无法运行的状态。当然，它们两个还是有一些细微的区别，可以查看[这篇文章]进一步了解。</p>
+
+<h2 id="阻塞非阻塞">阻塞、非阻塞</h2>
+
+<p>阻塞/非阻塞主要描述的是<strong>程序在等待调用结果返回时的状态</strong>：</p>
+
+<ul>
+  <li>阻塞调用：进程发起系统调用后，会被挂起，只有等系统调用返回后才能继续执行</li>
+  <li>非阻塞调用：进程发起系统调用后，系统调用会立即返回结果或者返回一个错误，不会阻塞当前进程。也就是说当前进程可以继续执行，不会让出 CPU</li>
+</ul>
+
+<p>阻塞调用只能通过同步的方式获取返回结果。以 <code class="highlighter-rouge">open()</code> 系统调用为例，当进程调用 <code class="highlighter-rouge">open()</code> 时会被阻塞，等待调用返回。OS 转而调度其他进程，硬件同时开始准备。当硬件准备就绪后，会发出一个 I/O 中断通知 OS，OS 设置某些寄存器的值，以向进程传递参数，然后调起被阻塞的进程。进程此时获取到系统调用的返回值，将从暂停的位置继续执行。</p>
+
+<p>非阻塞调用其实也是同步的方式。非阻塞调用需要调用方不停地轮询检查返回结果，直到返回成功，然后再开始处理。</p>
+
+<h2 id="同步异步">同步、异步</h2>
+
+<p>这一小节让我们从程序员的视角，也即通用的编程模式的角度来讨论同步/异步的概念。这与操作系统无关，所以让我们暂时忘掉上一节的内容，重新开始吧。</p>
+
+<h3 id="简述">简述</h3>
+
+<p>同步和异步的关注点在于消息通信机制：</p>
+
+<ul>
+  <li>同步调用的执行是一个<strong>有序的线性序列</strong>，当 A 调用 B 后，A 会<strong>主动等待</strong> B 执行完成后再继续。比如 A 先后两次调用 B，记为 B(1)，B(2)，执行顺序一定是“A call B(1) -&gt; B(1) run -&gt; B(1) done, return A -&gt; A call B(2) -&gt; B(2) run -&gt; B(2) done, return A -&gt; A continue”。只有按照这种线性序列去执行程序，才能保证调用双方的状态同步。</li>
+  <li>异步调用是指当 A 调用 B 的时候，不等 B 执行结束，这个调用就会立即返回。当 B 执行完成后，B 会通过<strong>回调函数主动通知</strong> A。异步调用并<strong>不是 FIFO 的</strong>，即 A 发起的多个调用并不是按照顺序收到通知的，有可能 A 后发出的调用却先收到了 B 的回应。</li>
+</ul>
+
+<p>因此，同步和异步调用的关键区别就是被调用方（Callee）能否主动通知调用方（Caller）。如果 Callee 无法通知，那么 Caller 只能在每次调用时等待 Callee 执行结束，然后才能进行下一次调用，这就是同步的方式。而如果 Callee 能够主动通知，那么 Caller 在发起一次调用之后，可以直接执行其他的代码，也<strong>可以不等上次调用返回，立即发起下一次调用</strong>。Callee 会在执行结束时主动通知 Caller，Caller 会先跳转到回调函数那里处理这个事件，处理完成后再返回到原来的位置，继续往下执行。</p>
+
+<p>异步调用的好处是将调用双方解耦，调用方在发起一个调用后，不需要<strong>关注</strong>被调用方的状态，而是被动地等待被调用方的通知。显然，<strong>同步调用是需要关注被调用方的状态的，只有等上次调用结束，才能发起下一次调用</strong>。</p>
+
+<p>到这里，我们可以总结一下异步调用相比于同步调用的两个特点：</p>
+
+<ol>
+  <li><strong>通知机制</strong>：被调用者可以在完成时主动通知调用者</li>
+  <li><strong>非线性执行序列</strong>：① A 可以多次调用 B，不需要关注上次调用是否完成；② 多次调用的完成顺序并不是 FIFO 的，先调用的可能后完成</li>
+  <li><strong>并行执行</strong>：如果串行执行的话那就和同步调用没什么分别了</li>
+</ol>
+
+<p>这几个特点是异步调用的充分必要条件。<strong>当我们判断一个调用是同步还是异步的时候，只要判断它是否满足这几个条件即可</strong>。</p>
+
+<h3 id="实现方式">实现方式</h3>
+
+<h4 id="同步">同步</h4>
+
+<p>同步的实现方式有<strong>等待</strong>和<strong>轮询</strong>。</p>
+
+<p>在单线程的场景下，函数调用都是同步调用。如下所示，当 A 调用 B 后，无论 <code class="highlighter-rouge">B()</code> 会执行多长时间，A 都会<strong>等待</strong>，直到其返回执行结果。“等待”其实就是<strong>串行执行</strong>/顺序执行。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">B</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c">// 做一些费时间的工作...</span>
+    <span class="k">return</span> <span class="n">result</span> <span class="c">// 返回结果</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">A</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">:=</span> <span class="n">B</span><span class="p">()</span> <span class="c">// A 调用 B</span>
+    <span class="c">// 等 B 返回后，才能执行后续的任务</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在多线程的场景下，可以使用<strong>轮询</strong>的方式实现同步：使用一个全局的标志位表示 B 的工作是否完成、再使用一个全局变量保存 B 的结果。A 可以不断轮询标志位直到其为 true，然后到全局变量中获取 B 的结果。如下所示：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">flag</span> <span class="kt">bool</span> <span class="o">=</span> <span class="no">false</span> <span class="c">// B 是否完成，初始为未完成</span>
+<span class="k">var</span> <span class="n">result</span> <span class="n">Object</span>  <span class="o">=</span><span class="no">nil</span> <span class="c">// 保存 B 的返回结果</span>
+
+<span class="k">func</span> <span class="n">A</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">B</span><span class="p">()</span> <span class="c">// A 先调用 B，这一行会立即返回</span>
+    <span class="k">for</span> <span class="n">flag</span> <span class="o">!=</span> <span class="no">true</span> <span class="p">{}</span> <span class="c">// 不断轮询标志位，检查 B 是否完成工作</span>
+    <span class="c">// 如果 B 的工作完成了，跳出循环，开始处理返回结果</span>
+    <span class="n">process</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c">// 以下代码是用 golang 书写，你可以简单地把 go 关键字的作用理解为：创建一个新的线程</span>
+<span class="c">// 并在这个线程里执行其后面的函数。go 关键字不会阻塞原函数的执行，所以调用 B() 会立即返回</span>
+<span class="k">func</span> <span class="n">B</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c">// 在一个新的线程里执行真正的工作</span>
+        <span class="c">// 很多很多工作完成后...</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="no">true</span> <span class="c">// 设置标志位</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">someData</span> <span class="c">// 设置结果</span>
+    <span class="p">}</span>
+    <span class="c">// 这里会立即返回，不会等待 go func... 执行完毕</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>即使 A、B 在两个线程里并行执行，A 也会一直在 <code class="highlighter-rouge">for</code> 循环那里空转，等待 B 执行结束。像这种情况还不如将 A 阻塞，让出 CPU。当然 A 也可以在轮询的过程中穿插一些自己的工作，充分利用多线程的优势，不要傻傻地等待：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">flag</span> <span class="o">!=</span> <span class="no">true</span> <span class="p">{</span> <span class="c">// 不断轮询标志位，检查 B 是否完成工作</span>
+    <span class="c">// 如果 B 的工作还没有完成，A 可以先做一点别的事</span>
+    <span class="n">doSomeThing</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>但这还是一种同步的方式。在这个示例里，A 依然需要不断地<strong>主动查询</strong> B 是否执行结束，B 没有通知机制；A 对 B 的调用只能是<strong>线性</strong>的，即调用 B 后只能等其执行结束，才能继续下一次调用。</p>
+
+<h4 id="异步">异步</h4>
+
+<p>异步的实现方式是<strong>回调</strong>函数或<strong>通知</strong>，这是一个概念。A 在调用 B 的时候，给 B 传一个回调函数作为参数，当 B 执行完成后，会调用这个回调函数，这相当于 B 通知了 A。</p>
+
+<p>典型的异步模型是 Node.js，通过事件触发回调。这是一段基于回调的示例代码：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">A</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// A 调用 B，并给 B 传递一个回调</span>
+    <span class="nx">B</span><span class="p">(</span><span class="nx">func</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">process</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="c1">// 然后 A 就去做别的事了</span>
+    <span class="nx">doOtherThing</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="cm">/* ———————— 假设 A 和 B 并行执行 —————— */</span>
+
+<span class="kd">function</span> <span class="nx">B</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 很多很多工作完成后...</span>
+    <span class="c1">// 调用 callback，通知 A 工作完成了</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="nx">someData</span><span class="p">)</span> <span class="c1">// 可以通过参数给 A 传递一些数据</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="异步的应用场景">异步的应用场景</h2>
+
+<p>接下来让我们看看异步的应用场景。异步适合 CPU 不密集但是 I/O 密集的场景。</p>
+
+<p>举个例子，假设有一个应用，负责从本地文件系统中读取文件并处理这些文件，假设读取文件需要 5 秒，处理它需要 2 秒。如果以同步的方式编写代码，那么只能按照 <code class="highlighter-rouge">设备读取第一个文件 → CPU 处理第一个文件 → 设备读取第二个文件 → CPU 处理第二个文件</code> 的线性序列来执行，但是在等待文件读取的过程中，CPU 其实是空闲的，这会造成极大的性能浪费。</p>
+
+<p>相反，如果采用异步的方法，执行的顺序有可能是这样的：<code class="highlighter-rouge">设备读取第一个文件 → CPU 处理第一个文件，同时设备读取第二个文件 → CPU 处理第二个文件，同时设备读取第三个文件</code>。在这种情况下 CPU 处理和设备读取可以并行进行，提高了资源利用率。</p>
+
+<p>再举一个例子，比如在编写一个爬虫程序的时候，需要访问 N 个 url 并且处理返回的网页内容。这个例子和上面“读取并处理多个文件的内容”非常相似，网络 I/O 和磁盘 I/O 都属于慢速场景，如果访问完一个 url 再访问下一个，CPU 大部分时间都在等待。这里可以采用异步的方式编写代码，使用多线程并行访问并处理每个 url。</p>
+
+<h2 id="程序层面的阻塞非阻塞同步异步">程序层面的阻塞/非阻塞、同步/异步</h2>
+
+<ul>
+  <li>阻塞/非阻塞关注的是<strong>单个进程的状态</strong>，区别在于进程是否被挂起
+    <ul>
+      <li>阻塞：某个调用会使得进程会被挂起，不占据 CPU，也无法执行；调用结束后恢复执行</li>
+      <li>非阻塞：某个调用会直接返回，进程不会被挂起，可以通过轮询的方式获取调用结果</li>
+    </ul>
+  </li>
+  <li>同步/异步关注的是<strong>多次调用的执行顺序</strong>，区别在于是否必须线性执行以及是否可以回调通知
+    <ul>
+      <li>同步：依次执行，是一种线性序列；A 调用 B，B 执行完后才会返回，然后 A 继续执行</li>
+      <li>异步：并行执行，返回顺序不确定；A 调用 B 会立即返回，A 通过回调的方式获取调用结果</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>阻塞调用和非阻塞调用其实都是同步的</strong>。阻塞调用显而易见，一旦 A 发起一个阻塞调用，A 就会被挂起，等待调用返回时才能再继续执行。非阻塞调用在数据没有准备好时会返回一个错误，因此需要调用方轮询。等待和轮询都是同步的方式。</p>
+
+<p>但是我们可以<strong>在高层封装这些同步调用，来支持异步的编程方式</strong>。</p>
+
+<p>以 node.js 为例，node.js 提供的一系列接口比如发起网络请求、读取文件等都是异步的，需要传递一个回调函数来处理结果。比如读取文件的函数的签名为 <code class="highlighter-rouge">fs.readFile(file[, options], callback)</code>，使用方法为：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">"</span><span class="s2">/etc/passwd</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>这里我们以异步的方式获取文件内容，但是在底层，node.js 使用的还是同步非阻塞的系统调用。之所以支持这种异步的写法，是因为 node.js 使用基于事件的方式而不是多线程的方式实现并发，它在一个进程里以单线程的方式运行一个事件循环，每次从事件队列中取出一个事件，然后运行该事件上的回调函数。</p>
+
+<p>我们可以看到，程序框架能够通过高层的封装，在同步的接口上提供异步编程的能力。很多时候我们之所以容易将阻塞/非阻塞、同步/异步搞混，是因为我们总是在操作系统层面讨论前两个，却在程序框架层面讨论后两个。比如有人说：”非阻塞=异步，因为非阻塞和异步一样，都是调用后立刻返回，不需要等待这次调用完全结束“。这种说法之所以错误，是因为异步编程必须要一种<em>通知</em>的机制，如果被调用方无法通知，那只能靠调用方轮询，这就成了同步了。操作系统的非阻塞 I/O 并没有提供一种通知的机制，是我们使用的程序框架封装了这些系统接口，在更高层面上为我们提供了一种通知的机制（比如事件循环）。</p>
+
+<h2 id="内核层面的阻塞非阻塞同步异步">内核层面的阻塞/非阻塞、同步/异步</h2>
+
+<p>接下来我们在内核层面讨论阻塞/非阻塞、同步/异步。</p>
+
+<p>Unix 提供了 5 种 I/O 模型，除了上文讨论的阻塞 I/O、非阻塞 I/O，还有 I/O 复用(select/poll/epoll)、信号驱动和异步 I/O 模型(AIO)。<strong>只有异步 I/O 是符合异步 I/O 操作的含义的，其他四个都是同步 I/O</strong>。让我们来看看为什么。</p>
+
+<p>一个 I/O 操作通常包括两个不同阶段：</p>
+
+<ol>
+  <li>发起 I/O 请求，等待数据准备好</li>
+  <li>实际的 I/O 操作：从内核向进程复制数据</li>
+</ol>
+
+<p>第一个阶段区分的是阻塞 I/O 与非阻塞 I/O：如果发起 I/O 请求后会阻塞直到完成，那么就是阻塞 I/O，如果立即返回，那么就是非阻塞 I/O。</p>
+
+<p><strong>内核层面讨论同步/异步，主要关注的是第二个阶段</strong>。在执行实际的 I/O 操作时，如果进程会被阻塞，那就是同步 I/O，如果进程不会被阻塞，可以做别的事，那就是异步 I/O。</p>
+
+<p>实际的 I/O 操作是指将数据由内核空间复制回进程缓冲区的操作。从实现层面来说，同步 I/O 需要进程来完成这个工作，所以在这个时间段它相当于在等待 I/O 完成；异步 I/O <strong>由内核来完成 I/O 工作，完成后内核会通知进程</strong>，进程在等待 I/O 完成的这段时间可以做别的事。</p>
+
+<p>下面这张图是《Unix 网络编程》中对 5 种 I/O 模型的总结：
+<img src="/media/15738036602935.jpg" alt="-w552" /></p>
+
+<p>在内核层面，只有异步 I/O 模型是真正的异步。它实现了我们前面说的异步模式的三要素：</p>
+
+<ol>
+  <li>并行执行：确实，I/O 操作（复制数据的过程）和进程运行是同时进行的，I/O 不会阻塞进程的运行</li>
+  <li>通知机制：I/O 完成后由操作系统给进程发一个通知。这个通知可以用信号来实现：进程事先注册一个信号处理器 signal handler，当进程收到信号的时候会中断当前的操作，转去执行相应的 signal handler，结束后再返回中断的地方继续执行</li>
+  <li>非线性执行序列：肯定的，因为异步 I/O 在第一个阶段不会阻塞进程，所以进程可以多次发起异步 I/O 调用，不知道哪个先返回结果</li>
+</ol>
+
+<p>所以确实只有 AIO 是符合异步定义的接口。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>异步同步的区别在于能否并行、被调用方能否主动通知、执行序列是否可以不是线性的。只有非线性执行的序列并且能并行运行，才是异步的，而这必须要一种通知机制来支持异步调用之间的消息通信。</p>
+
+<p>阻塞 I/O 一定是同步的。非阻塞 I/O 需要轮询，也是同步的，因为其执行序列是线性的。</p>
+
+<p>I/O 多路复用可以同时注册多个文件描述符，并且哪个文件描述符先就绪是不确定的，符合“非线性执行序列”，那它是不是异步的？不是，因为从程序的角度来看，I/O 多路复用不具有通知机制，进程需要主动调用 select 检查哪些描述符就绪。</p>
+
+<p>I/O 多路复用的阻塞与非阻塞：通常我们称 I/O 多路复用是同步非阻塞的，这是因为它在第二个阶段（从内核向进程复制数据）采用的是非阻塞的 I/O 系统调用。但是进程在发起 select、epoll 等时还是会被阻塞。这相当于将阻塞点改变了位置，CPU 层面是非阻塞的，进程层面是阻塞的。</p>
+
+<p>从流程上来看，使用 select 函数进行 I/O 请求和同步阻塞模型没有太大的区别。但是，使用 select 以后最大的优势是用户可以在一个线程内同时处理多个 socket 的 I/O 请求。用户可以注册多个 socket，然后不断地调用 select 读取被激活的 socket，即可达到在同一个线程内同时处理多个 I/O 请求的目的。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。</p>
+
+<p>所以 I/O 多路复用是：多路、同步、阻塞的模型（CPU 层面非阻塞，进程层面阻塞）。相对的，阻塞 I/O 是：单路、同步、阻塞的模型。</p>
+
+<hr />
+
+<p>参考资料：</p>
+
+<ul>
+  <li><a href="https://www.jianshu.com/p/b9a25358e3ff">推荐阅读：【再议 I/O】阻塞、非阻塞、同步、异步</a>：这篇文章详细分析了 UNIX 的五种 I/O 模型的异同，在不同层次讨论了阻塞、非阻塞、同步、异步，讨论了广义的异步和侠义的异步。</li>
+  <li><a href="https://www.zhihu.com/question/19732473/answer/26101328">怎样理解阻塞非阻塞与同步异步的区别？ - 大姚的回答 - 知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/19732473/answer/88599695">怎样理解阻塞非阻塞与同步异步的区别？ - 银月游侠的回答 - 知乎</a></li>
+</ul>]]></content><author><name>ooTao</name></author><summary type="html"><![CDATA[从进程调度谈起]]></summary></entry><entry><title type="html">🎈【Hello，world】Welcome to jekyll</title><link href="http://localhost:4000/2018/welcome-to-jekyll.html" rel="alternate" type="text/html" title="🎈【Hello，world】Welcome to jekyll" /><published>2018-11-11T00:00:00+08:00</published><updated>2018-11-11T00:00:00+08:00</updated><id>http://localhost:4000/2018/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2018/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+<p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name>ooTao</name></author><summary type="html"><![CDATA[You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.]]></summary></entry></feed>
