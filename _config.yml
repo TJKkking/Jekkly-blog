@@ -5,7 +5,7 @@ url: https://tjkkking.github.io/blog # this is your site's root address.
 # baseurl: "/blog"
 description: > # this means to ignore newlines until "show_excerpts:"
   About
-favicon: "./assets/favicon.png" # set the favicon of the site
+favicon: "./favicon.png" # set the favicon of the site
 google_analytics: 
 
 show_excerpts: false # set to true to show excerpts on the homepage
