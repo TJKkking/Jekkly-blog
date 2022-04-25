@@ -1,7 +1,7 @@
 title: ooTao' Blog # The title of the blog
 author: ooTao # Your name
 email: 2510399607@qq.com # your email shown in the footer
-url: /blog # this is your site's root address.
+url: / # this is your site's root address.
 # baseurl: "/blog"
 description: > # this means to ignore newlines until "show_excerpts:"
   About
