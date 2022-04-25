@@ -5,7 +5,7 @@ url: https://tjkkking.github.io/blog # this is your site's root address.
 # baseurl: "/blog"
 description: > # this means to ignore newlines until "show_excerpts:"
   About
-favicon: "./net.png" # set the favicon of the site
+favicon: "./assets/favicon.png" # set the favicon of the site
 google_analytics: 
 
 show_excerpts: false # set to true to show excerpts on the homepage
@@ -17,7 +17,7 @@ beian: 滇ICP备2022002272号
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
 moving:
   #avatar_url: "https://i.loli.net/2020/02/17/vY49QcyqRlbtB78.jpg" # avatar in about page
-  avatar_url: "./micro.jpg"
+  avatar_url: "./assets/avatar.jpg"
   about_you: 至今忆起那清晨，仿佛只是昨天。
   date_format: "%b %d" # date format of posts in home page
   back_to: "Home" # In the post page, you have a back button above the title, you can custom the text by yourself.
