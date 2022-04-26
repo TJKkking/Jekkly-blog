@@ -27,6 +27,10 @@
     margin-top: 0
 }
 
+.mb-0 {
+    margin-bottom: 0
+}
+
 .text-gray-300 {
     --tw-text-opacity: 1;
     color: rgba(209,213,219,var(--tw-text-opacity))
