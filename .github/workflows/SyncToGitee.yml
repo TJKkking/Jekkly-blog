@@ -19,7 +19,7 @@ jobs:
     steps:
     
     - name: Sync Github Repos To Gitee
-      uses: Yikun/hub-mirror-action@v1.2
+      uses: Yikun/hub-mirror-action@v1.0
       with:
         src: github/TJKkking
         dst: gitee/JACKYTOO
