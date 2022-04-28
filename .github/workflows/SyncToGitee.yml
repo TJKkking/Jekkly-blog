@@ -1,33 +1,22 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Sync Github Repos To Gitee
 
-# Controls when the workflow will run
 on:
   push:
     branches:
       - master
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
-    - name: Sync Github Repos To Gitee
-      uses: Yikun/hub-mirror-action@v1.0
+
+    - name: Sync Github Repos To Gitee 
+      uses: Yikun/hub-mirror-action@v1.2 #使用Yikun开发的hub-mirror-action
       with:
-        src: github/TJKkking
-        dst: gitee/JACKYTOO
-        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-        dst_token:  ${{ secrets.GITEE_TOKEN }} 
-        account_type: user
-        clone_style: "ssh"
-        debug: true 
-        force_update: true 
-        static_list: "blog"
-        timeout: '600s'
+        src: github/TJKkking #源端账户名
+        dst: gitee/JACKYTOO #目的端账户名
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }} #SSH密钥对中的私钥，即 id_rsa
+        dst_token:  ${{ secrets.GITEE_TOKEN }} #Gitee账户的私人令牌
+        account_type: user #账户类型
+        clone_style: "ssh" #使用ssh方式进行clone，也可以使用https
+        debug: true #启用后会显示所有执行命令
