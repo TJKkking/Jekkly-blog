@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Sync Github Repos To Gitee
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    
+    - name: Sync Github Repos To Gitee
+      uses: Yikun/hub-mirror-action@v1.2
+      with:
+        src: github/TJKkking
+        dst: gitee/JACKYTOO
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+        dst_token:  ${{ secrets.GITEE_TOKEN }} 
+        account_type: user
+        clone_style: "ssh"
+        debug: true 
+        force_update: true 
+        static_list: "blog"
+        timeout: '600s'
