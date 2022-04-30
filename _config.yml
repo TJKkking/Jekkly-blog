@@ -47,8 +47,9 @@ moving:
     # - username:
     #   instance:
 
-# Build settings
-# theme: moving # note, please use huangyz0918/moving if you want to publish to Github Pages.
+algolia:
+    application_id: M1AWV9YTQ4
+    index_name: ooTao
 
 plugins:
   - jekyll-feed
