@@ -1,7 +1,7 @@
 title: ooTao' Blog # The title of the blog
 author: ooTao # Your name
 email: 2510399607@qq.com # your email shown in the footer
-url: https://tjkkking.github.io/blog # this is your site's root address.
+url: https://ootao.xyz # this is your site's root address.
 # baseurl: "/blog"
 description: > # this means to ignore newlines until "show_excerpts:"
   About
@@ -38,8 +38,6 @@ moving:
     # youtube_channel_name:
     # telegram:
     # googleplus:
-    # microdotblog:
-    # reddit:
     # Mastodon instances
     # mastodon:
     # - username:
@@ -47,8 +45,9 @@ moving:
     # - username:
     #   instance:
 
-# Build settings
-# theme: moving # note, please use huangyz0918/moving if you want to publish to Github Pages.
+algolia:
+    application_id: M1AWV9YTQ4
+    index_name: ooTao
 
 plugins:
   - jekyll-feed

@@ -6,3 +6,6 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'jekyll-redirect-from'
 gem "webrick", "~> 1.7"
 gem 'jekyll-sitemap'
+group :jekyll_plugins do
+  gem 'jekyll-algolia'
+end
