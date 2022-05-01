@@ -12,3 +12,5 @@ nohup.out
 
 node_modules
 urls.txt
+rebuild.sh
+plan.txt
