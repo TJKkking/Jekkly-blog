@@ -32,7 +32,7 @@ $ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl vers
 
 稍等几分钟后再查看pod状态 `kubectl get pods -n kube-system`
 
-![Snipaste_2022-05-06_15-16-11](media/Snipaste_2022-05-06_15-16-11.png)
+![Snipaste_2022-05-06_15-16-11](/media/Snipaste_2022-05-06_15-16-11.jpg)
 
 至此，集群的master节点就部署完成了
 
@@ -153,7 +153,7 @@ k8s-node1    Ready    <none>                 68m    v1.23.6
 
 再等待一段时间等node1的网络插件初始化成功，最后查看各个pod状态 `kubectl get pods -n kube-system`
 
-![Snipaste_2022-05-06_16-50-37](media/Snipaste_2022-05-06_16-50-37.png)
+![Snipaste_2022-05-06_16-50-37](/media/Snipaste_2022-05-06_16-50-37.jpg)
 
 ALL right.
 
