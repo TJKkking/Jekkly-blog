@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "💻使用Jekyll搭建个人博客（一）"
+title: "💻【Jekyll】使用Jekyll搭建个人博客（一）"
 categories: tutorial
 author: "ooTao"
 typora-root-url: ..

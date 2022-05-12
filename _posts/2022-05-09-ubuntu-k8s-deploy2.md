@@ -65,6 +65,8 @@ vim /etc/network/interfaces
 
 
 
+如果有遇到**CoreDNS** 状态是 **CrashLoopBackOff** ，可以参考[Kubernetes CoreDNS 状态是 CrashLoopBackOff 解决思路](https://blog.csdn.net/qq_24046745/article/details/93988920)。
+
 ## 部署worker节点
 
 首先禁用swap并关闭防火墙
