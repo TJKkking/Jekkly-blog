@@ -45,9 +45,9 @@ moving:
     # - username:
     #   instance:
 
-algolia:
-    application_id: M1AWV9YTQ4
-    index_name: ooTao
+#algolia:
+#   application_id: M1AWV9YTQ4
+#   index_name: ooTao
 
 plugins:
   - jekyll-feed
